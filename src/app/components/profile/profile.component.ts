@@ -21,6 +21,8 @@ export class ProfileComponent extends EventEmitter implements OnInit {
     panel = null;
     controls = null;
 
+    public ProfileComponent = ProfileComponent;
+
     ngOnInit(): void {
         this.panel = document.querySelector('.panel');
         this.controls = this.panel.querySelectorAll('input.control');
@@ -29,8 +31,12 @@ export class ProfileComponent extends EventEmitter implements OnInit {
         this.emit('loaded');
     }
 
-    constructor (private profile: ProfileService) {
+    constructor (private _profile: ProfileService) {
         super();
+    }
+
+    get profile() {
+        return this._profile;
     }
 
     /**
@@ -41,8 +47,8 @@ export class ProfileComponent extends EventEmitter implements OnInit {
         if (!this.open) {
             this.open = true;
             this.panel.classList.add('active');
-            this.tuto.classList.toggle('active', !this.profile.isComplete());
-            this.profile.emit('open');
+            this.tuto.classList.toggle('active', !this._profile.isComplete());
+            this._profile.emit('open');
         }
     }
 
@@ -51,11 +57,11 @@ export class ProfileComponent extends EventEmitter implements OnInit {
      */
     @boundMethod
     closeProfile() {
-        if (this.open && this.profile.isComplete()) {
+        if (this.open && this._profile.isComplete()) {
             this.open = false;
             this.panel.classList.remove('active');
-            this.tuto.classList.toggle('active', !this.profile.isComplete());
-            this.profile.emit('close');
+            this.tuto.classList.toggle('active', !this._profile.isComplete());
+            this._profile.emit('close');
         }
     }
 

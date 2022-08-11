@@ -27,9 +27,9 @@ export abstract class BaseSocketClient extends EventEmitter {
     /**
      * On socket close
      */
+    @boundMethod
     onClose() {
         this.connected = false;
-        this.emit('close', this);
         this.stop();
         this.detachEvents();
     }
@@ -193,9 +193,9 @@ export abstract class BaseSocketClient extends EventEmitter {
     }
 
     @boundMethod
-    onMessage(e: MessageEvent) {
+    onMessage(e: WebSocket.MessageEvent) {
 
-        const data = JSON.parse(e.data);
+        const data = JSON.parse(e.data.toString());
         const length = data.length;
 
         for (let i = 0; i < length; i++) {

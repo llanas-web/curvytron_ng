@@ -29,7 +29,6 @@ export class CurvytronServer extends EventEmitter {
         this.socket = new WebSocket.Server({ port });
         console.log('Listening on port : ' + port);
         this.socket.on('connection', this.onSocketConnection);
-        this.socket.on('error', this.onError);
         this.clients = new Collection<ServerSocketClient>([], 'id', true);
 
         this.roomRepository = new RoomRepository();
@@ -39,6 +38,7 @@ export class CurvytronServer extends EventEmitter {
     @boundMethod
     onSocketConnection(ws: WebSocket, request: http.IncomingMessage) {
         const client = new ServerSocketClient(ws, 1, '127.0.0.1');
+        ws.on('error', (error) => this.onError(client, error));
         this.clients.add(client);
         client.on('close', this.onSocketDisconnection);
 
@@ -46,6 +46,7 @@ export class CurvytronServer extends EventEmitter {
         this.emit('client', client);
 
         console.log('Client %s connected.', client.id);
+        console.log(`There's ${this.clients.count()} client`)
     }
 
     @boundMethod
@@ -58,8 +59,10 @@ export class CurvytronServer extends EventEmitter {
      * On error
      */
     @boundMethod
-    onError(error: Error) {
-        console.error('Server Error:', error.stack);
+    onError(client: ServerSocketClient, error: any) {
+        if(error.code === 'ECONNRESET') {
+            this.clients.remove(client);
+        }
     }
 }
 

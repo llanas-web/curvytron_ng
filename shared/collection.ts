@@ -184,7 +184,7 @@ export class Collection<T> {
     /**
      * Apply the given callback to all element
      */
-    walk(callable: () => void) {
+    walk(callable: (arg0: T) => void) {
         this.items.forEach(callable);
     }
 
