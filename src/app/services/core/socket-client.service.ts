@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseSocketClient } from '@shared/core/BaseSocketClient';
 import { boundMethod } from 'autobind-decorator';
-import * as WebSocket from 'ws';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +11,7 @@ export class SocketClientService extends BaseSocketClient {
 
         const protocol = (location.protocol === 'https:') ? 'wss://' : 'ws://';
         // super(new window.WebSocket(protocol + document.location.host + document.location.pathname, ['websocket']));
-        super(new window.WebSocket(protocol + 'localhost:8090', ['websocket']) as unknown as WebSocket);
+        super(new window.WebSocket(protocol + 'localhost:8090', ['websocket']));
 
         this.id = null;
         this.connected = false;
@@ -25,7 +24,7 @@ export class SocketClientService extends BaseSocketClient {
     /**
      * On open
      */
-    onClose(e?: WebSocket.CloseEvent) {
+    onClose(e?: Event) {
         console.info('Disconnected.');
         this.connected = false;
         this.id = null;
@@ -38,7 +37,7 @@ export class SocketClientService extends BaseSocketClient {
      * On open
      */
     @boundMethod
-    onOpen(e: WebSocket.Event) {
+    onOpen(e: Event) {
         console.info('Socket open.');
         this.addEvent('whoami', null, this.onConnection);
     }
@@ -62,7 +61,7 @@ export class SocketClientService extends BaseSocketClient {
      * On error
      */
     @boundMethod
-    onError(e: WebSocket.ErrorEvent) {
+    onError(e: Event) {
         console.error(e);
 
         if (!this.connected) {

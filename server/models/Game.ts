@@ -15,7 +15,6 @@ import { Room } from './Room';
  */
 export class Game extends BaseGame {
 
-    world: World;
     deaths: Collection<any>;
     controller: GameController;
     bonusStack: any;
@@ -24,9 +23,10 @@ export class Game extends BaseGame {
     deathInFrame: boolean;
 
     /** OVERRIDE */
-    room: Room;
-    avatars: Collection<Avatar>;
-    bonusManager: BonusManager;
+    declare world: World;
+    declare room: Room;
+    declare avatars: Collection<Avatar>;
+    declare bonusManager: BonusManager;
 
     getLoadingAvatars: () => Collection<Avatar>;
 

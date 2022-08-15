@@ -10,7 +10,9 @@ import { FloodFilter } from './FloodFilter';
 export class Chat extends BaseChat {
 
     floodFilter: any;
-    messages: Collection<Message>;
+    
+    /** OVERRIDE */
+    declare messages: Collection<Message>;
 
     constructor() {
 

@@ -14,7 +14,7 @@ export class Avatar extends BaseAvatar {
     body: AvatarBody;
 
     /** OVERRIDE */
-    player: Player;
+    declare player: Player;
 
 
     constructor(player: Player) {

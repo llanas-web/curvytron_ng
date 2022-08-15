@@ -1,6 +1,9 @@
 {
     "name": "curvytron-ng",
     "version": "0.0.0",
+    "engines": {
+        "node": "12^"
+    },
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -61,5 +64,9 @@
     "_moduleAliases": {
         "@server": "bin/server/",
         "@shared": "bin/shared/"
+    },
+    "browser": {
+        "bufferutil": false,
+        "utf-8-validate": false
     }
 }

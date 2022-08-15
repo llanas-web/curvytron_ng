@@ -14,9 +14,9 @@ export class Room extends BaseRoom {
     controller: RoomController;
 
     // OVERRIDE
-    game: Game;
-    players: Collection<Player>;
-    config: RoomConfig;
+    declare game: Game;
+    declare players: Collection<Player>;
+    declare config: RoomConfig;
 
     constructor(name: string) {
 

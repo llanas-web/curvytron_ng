@@ -8,7 +8,8 @@ import { ServerSocketClient } from '../core/ServerSocketClient';
  */
 export class Player extends BasePlayer {
 
-    client: ServerSocketClient;
+    /** OVERRIDE */
+    declare client: ServerSocketClient;
 
     constructor(client: BaseSocketClient, name: string, color: string) {
         super(client, name, color);

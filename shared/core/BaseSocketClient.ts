@@ -1,6 +1,5 @@
 import { boundMethod } from 'autobind-decorator';
 import { EventEmitter } from 'events';
-import * as WebSocket from 'ws';
 
 export abstract class BaseSocketClient extends EventEmitter {
 
@@ -193,7 +192,7 @@ export abstract class BaseSocketClient extends EventEmitter {
     }
 
     @boundMethod
-    onMessage(e: WebSocket.MessageEvent) {
+    onMessage(e: MessageEvent) {
 
         const data = JSON.parse(e.data.toString());
         const length = data.length;
