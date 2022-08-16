@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BasePlayer } from '@shared/model/BasePlayer';
 import { boundMethod } from 'autobind-decorator';
 import { EventEmitter } from 'events';
-import { ProfileService } from 'src/app/services/profile.service';
+
+import { ProfileService } from '../../services/profile.service';
 
 
 @Component({
@@ -12,16 +13,23 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ProfileComponent extends EventEmitter implements OnInit {
 
-    static NAME_MAX_LENGTH = BasePlayer.maxLength;
-    static COLOR_MAX_LENGTH = BasePlayer.colorMaxLength;
-
     open = false;
     loaded = false;
     tuto = null;
     panel = null;
     controls = null;
 
-    public ProfileComponent = ProfileComponent;
+    get nameMaxLength() {
+        return BasePlayer.maxLength;
+    }
+
+    get colorMaxLength() {
+        return BasePlayer.colorMaxLength;
+    }
+
+    get profileService() {
+        return this.profile;
+    }
 
     ngOnInit(): void {
         this.panel = document.querySelector('.panel');
@@ -31,12 +39,8 @@ export class ProfileComponent extends EventEmitter implements OnInit {
         this.emit('loaded');
     }
 
-    constructor (private _profile: ProfileService) {
+    constructor (private profile: ProfileService) {
         super();
-    }
-
-    get profile() {
-        return this._profile;
     }
 
     /**
@@ -47,8 +51,8 @@ export class ProfileComponent extends EventEmitter implements OnInit {
         if (!this.open) {
             this.open = true;
             this.panel.classList.add('active');
-            this.tuto.classList.toggle('active', !this._profile.isComplete());
-            this._profile.emit('open');
+            this.tuto.classList.toggle('active', !this.profile.isComplete());
+            this.profile.emit('open');
         }
     }
 
@@ -57,11 +61,11 @@ export class ProfileComponent extends EventEmitter implements OnInit {
      */
     @boundMethod
     closeProfile() {
-        if (this.open && this._profile.isComplete()) {
+        if (this.open && this.profile.isComplete()) {
             this.open = false;
             this.panel.classList.remove('active');
-            this.tuto.classList.toggle('active', !this._profile.isComplete());
-            this._profile.emit('close');
+            this.tuto.classList.toggle('active', !this.profile.isComplete());
+            this.profile.emit('close');
         }
     }
 
