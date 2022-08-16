@@ -12,10 +12,7 @@
     </a>
 </header>
 
-<div *ngIf="profile">
-    <!-- <ng-include src="'js/views/profile/link.html'"></ng-include> -->
-    <app-profile id="profile" class="panel"></app-profile>
-</div>
+<app-profile ></app-profile>
 
 <div id="connecting" *ngIf="status === 'connecting'" class="container text-center">
     <h3>Connecting...</h3>

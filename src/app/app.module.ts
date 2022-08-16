@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RoomComponent } from './components/room/room.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { LinkComponent } from './components/profile/link/link.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ProfileComponent,
         RoomsComponent,
-        RoomComponent
+        RoomComponent,
+        LinkComponent,
     ],
     imports: [
         BrowserModule,
