@@ -2,7 +2,7 @@
     "name": "curvytron-ng",
     "version": "0.0.0",
     "engines": {
-        "node": "12^"
+        "node": "14^"
     },
     "scripts": {
         "ng": "ng",
@@ -23,7 +23,9 @@
         "@angular/platform-browser-dynamic": "~9.0.1",
         "@angular/router": "~9.0.1",
         "core-js": "^3.6.4",
+        "install": "^0.13.0",
         "module-alias": "^2.2.2",
+        "npm": "^8.17.0",
         "rxjs": "~6.5.4",
         "rxjs-websockets": "^8.0.0",
         "soundjs": "^1.0.1",
@@ -45,7 +47,7 @@
         "@types/angular-sanitize": "^1.7.0",
         "@types/jasmine": "^3.5.4",
         "@types/jasminewd2": "~2.0.3",
-        "@types/node": "^12.12.62",
+        "@types/node": "^18.7.5",
         "@types/soundjs": "^0.6.27",
         "autobind-decorator": "^2.4.0",
         "codelyzer": "^5.1.2",

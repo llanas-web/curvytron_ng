@@ -89,7 +89,7 @@ export abstract class BaseSocketClient extends EventEmitter {
      * @param callback Function to execute
      * @param force IDFK
      */
-    addEvent(name: string, data?: object, callback?: (a: any) => any, force?: boolean) {
+    addEvent(name: string, data?: object | boolean, callback?: (a: any) => any, force?: boolean) {
         const event: any[] = [name];
 
         if (typeof (data) !== 'undefined') {

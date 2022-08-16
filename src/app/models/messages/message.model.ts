@@ -30,6 +30,7 @@ export default class Message extends BaseMessage {
     id: number;
     creation: Date;
     date: string;
+    content = '';
 
     constructor (creation?: number | Date) {
 

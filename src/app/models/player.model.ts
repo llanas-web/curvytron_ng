@@ -14,6 +14,7 @@ export class Player extends BasePlayer {
     vote = false;
     kicked = false;
     position: string;
+    
     client: Client;
 
     constructor (id: string, client: Client, name: string, color: string, ready: boolean) {

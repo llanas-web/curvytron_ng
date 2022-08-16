@@ -26,7 +26,8 @@ export class SocketClientService extends BaseSocketClient {
     /**
      * On open
      */
-    onClose(e?: Event) {
+    @boundMethod
+    onClose(e?: CustomEvent) {
         console.info('Disconnected.');
         this.connected = false;
         this.id = null;
@@ -39,10 +40,10 @@ export class SocketClientService extends BaseSocketClient {
      * On open
      */
     @boundMethod
-    onOpen(e: WebSocket) {
+    onOpen(e: CustomEvent) {
         console.info('Socket open.');
         this.addEvent('whoami', null, this.onConnection);
-    }
+    };
 
     /**
      * On socket connection

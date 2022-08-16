@@ -12,7 +12,7 @@ export class Player extends BasePlayer {
     declare client: ServerSocketClient;
 
     constructor(client: BaseSocketClient, name: string, color: string) {
-        super(client, name, color);
+        super(client.id, name, color);
     }
 
     /**

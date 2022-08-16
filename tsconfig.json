@@ -10,12 +10,13 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictFunctionTypes": false,
     "importHelpers": true,
-    "skipLibCheck": true,
-    "target": "es2015",
+    "skipLibCheck": false,
+    "target": "ESNext",
     "typeRoots": ["node_modules/@types"],
     "types": ["node"],
-    "lib": ["es2018", "dom"],
+    "lib": ["ESNext", "dom"],
     "paths": {
       "@shared/*": ["shared/*"]
     }
