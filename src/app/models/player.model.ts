@@ -21,6 +21,7 @@ export class Player extends BasePlayer {
 
         super(client.id, name, color, ready);
 
+        this.client = client;
         this.id = id;
         this.position = this.client.id + '-' + this.id;
         this.client.players.add(this);

@@ -1,5 +1,5 @@
 <section>
-    <div class="container room">
+    <div *ngIf="room" class="container room">
         <h2 class="header">
             {{ room.name }}
             <i class="icon-params" (click)="toggleParameters()" [ngClass]="{active: displayParameters}"></i>

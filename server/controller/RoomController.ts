@@ -74,11 +74,11 @@ export class RoomController extends EventEmitter {
             this.onClientAdd(client);
             callback({
                 success: true,
-                room: this.room.serialize(),
+                room: this.room.serialize(true),
                 master: this.roomMaster ? this.roomMaster.id : null,
-                clients: this.clients.map(function () { return this.serialize(); }).items,
+                clients: this.clients.map((client) => client.serialize()).items,
                 messages: this.chat.serialize(100),
-                votes: this.kickManager.votes.map(function () { return this.serialize(); }).items
+                votes: this.kickManager.votes.map((vote: any) => client.serialize()).items
             });
             this.socketGroup.addEvent('client:add', client.id);
             this.emit('client:add', { room: this.room, client });
@@ -162,7 +162,7 @@ export class RoomController extends EventEmitter {
         if (this.clients.isEmpty() || this.roomMaster) {
             return;
         }
-        const roomMaster = this.clients.match(function () { return this.active && this.isPlaying(); });
+        const roomMaster = this.clients.match((client: ServerSocketClient) => client.active && client.isPlaying());
         this.setRoomMaster(roomMaster);
     }
 

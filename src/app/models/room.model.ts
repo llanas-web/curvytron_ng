@@ -12,12 +12,15 @@ import RoomConfig from './room-config.model';
 export class Room extends BaseRoom {
 
     // OVERRIDE
-    players: Collection<Player>;
-    config: RoomConfig;
+    declare players: Collection<Player>;
+    declare config: RoomConfig;
 
     constructor (name: string) {
 
         super(name);
+
+        this.players = new Collection<Player>([], 'id', true);
+        this.config = new RoomConfig(this);
 
         this.players.index = false;
     }

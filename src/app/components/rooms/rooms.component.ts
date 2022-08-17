@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Collection } from '@shared/collection';
 import { BaseRoom } from '@shared/model/BaseRoom';
 import { boundMethod } from 'autobind-decorator';
@@ -25,7 +26,7 @@ export class RoomsComponent extends EventEmitter implements OnInit {
         return BaseRoom.maxLength;
     }
 
-    constructor (private socketClient: SocketClientService, private location: Location) {
+    constructor (private socketClient: SocketClientService, private router: Router) {
 
         super();
 
@@ -100,9 +101,11 @@ export class RoomsComponent extends EventEmitter implements OnInit {
     @boundMethod
     joinRoom(room: RoomListItem) {
         if (room.open) {
-            this.location.go(room.getUrl());
+            this.router.navigate([room.getUrl()]);
         } else if (room.password && room.password.match(new RegExp('[0-9]{4}'))) {
-            this.location.go(room.getUrl(), `password=${room.password}`);
+            this.router.navigate([room.getUrl()], {
+                queryParams: { password: room.password }
+            });
         }
     }
 

@@ -9,10 +9,11 @@ import { ServerSocketClient } from '../core/ServerSocketClient';
 export class Player extends BasePlayer {
 
     /** OVERRIDE */
-    declare client: ServerSocketClient;
+    client: ServerSocketClient;
 
-    constructor(client: BaseSocketClient, name: string, color: string) {
+    constructor(client: ServerSocketClient, name: string, color: string) {
         super(client.id, name, color);
+        this.client = client;
     }
 
     /**

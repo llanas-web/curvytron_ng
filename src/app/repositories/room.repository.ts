@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Collection } from '@shared/collection';
-import { BasePlayer } from '@shared/model/BasePlayer';
+import { BasePlayer, SerializedBasePlayer } from '@shared/model/BasePlayer';
 import { boundMethod } from 'autobind-decorator';
 import { EventEmitter } from 'events';
 
@@ -85,6 +85,7 @@ export class RoomRepository extends EventEmitter {
      * Join room
      */
     join(name, password, callback) {
+        console.log('JOIN ROOM REPO')
 
         if (this.room && this.room.name === name) {
             return callback({ success: true, room: this.room });
@@ -351,18 +352,17 @@ export class RoomRepository extends EventEmitter {
      * On join room
      */
     @boundMethod
-    onJoinRoom(e: any) {
-        const data = e.detail;
-        const player = new Player(
-            data.player.id,
-            this.clients.getById(data.player.client),
-            data.player.name,
-            data.player.color,
-            data.player.ready
+    onJoinRoom({player}: {player: SerializedBasePlayer}) {
+        const newPlayer = new Player(
+            player.id,
+            this.clients.getById(player.client),
+            player.name,
+            player.color,
+            player.ready
         );
 
-        if (this.room.addPlayer(player)) {
-            this.emit('player:join', { player });
+        if (this.room.addPlayer(newPlayer)) {
+            this.emit('player:join', { player: newPlayer });
         }
     }
 

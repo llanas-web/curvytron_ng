@@ -161,7 +161,7 @@ export class Collection<T> {
     /**
      * Map
      */
-    map<E>(callable: () => E): Collection<E> {
+    map<E>(callable: (elem: T) => E): Collection<E> {
         const elements = this.items.map(callable);
         return new Collection<E>(elements, this.key, this.index);
     }
@@ -169,7 +169,7 @@ export class Collection<T> {
     /**
      * Filter
      */
-    filter(callable: any): Collection<T> {
+    filter(callable: (elem: T) => boolean): Collection<T> {
         const elements = this.items.filter(callable);
         return new Collection(elements, this.key, this.index);
     }
@@ -177,7 +177,7 @@ export class Collection<T> {
     /**
      * Match
      */
-    match(callable: () => boolean): T {
+    match(callable: (elem: T) => boolean): T {
         return this.items.find(callable);
     }
 

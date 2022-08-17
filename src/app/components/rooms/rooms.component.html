@@ -28,7 +28,7 @@
             <span class="title" [ngPlural]="rooms.items.length">
                 <ng-template ngPluralCase="=0">Start by creating a room:</ng-template>
                 <ng-template ngPluralCase="=1">You can join 1 room!</ng-template>
-                <ng-template ngPluralCase="few">You can join rooms!</ng-template>
+                <ng-template ngPluralCase="other">You can join rooms!</ng-template>
             </span>
             <form class="top-right-form">
                 <button (click)="createRoom()" type="button" id="submit">

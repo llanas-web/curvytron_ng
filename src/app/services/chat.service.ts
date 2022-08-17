@@ -3,6 +3,7 @@ import { Collection } from '@shared/collection';
 import { BaseMessage } from '@shared/model/BaseMessage';
 import { BaseChat } from '@shared/service/BaseChat';
 import { boundMethod } from 'autobind-decorator';
+import { Client } from '../models/client.model';
 
 import MessageKick from '../models/messages/message-kick.model';
 import MessagePlayer from '../models/messages/message-player.model';
@@ -287,9 +288,9 @@ export class ChatService extends BaseChat {
      * On room master
      */
     @boundMethod
-    onRoomMaster(e: any) {
-        if (e.detail.master) {
-            this.addMessage(new MessageRoomMaster(e.detail.master));
+    onRoomMaster({master}: {master: null | Client}) {
+        if (master) {
+            this.addMessage(new MessageRoomMaster(master));
         }
     }
 

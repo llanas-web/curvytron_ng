@@ -71,7 +71,7 @@ export class KickManager extends EventEmitter {
      * Get total clients
      */
     getTotalClients(): number {
-        return this.controller.clients.filter(function () { return this.isPlaying(); }).count();
+        return this.controller.clients.filter((client) => client.isPlaying()).count();
     }
 
     /**

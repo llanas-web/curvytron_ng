@@ -49,9 +49,6 @@ export default class RoomConfig extends BaseRoomConfig {
 
     preset: any;
     customPreset: any;
-    password: any;
-    bonuses: any;
-    presets: any;
 
     constructor (room: Room) {
 
@@ -107,8 +104,8 @@ export default class RoomConfig extends BaseRoomConfig {
         const bonuses = this.getBonuses();
         let preset;
 
-        for (let i = this.presets.length - 1; i >= 0; i--) {
-            preset = this.presets[i];
+        for (let i = RoomConfig.presets.length - 1; i >= 0; i--) {
+            preset = RoomConfig.presets[i];
             if (this.bonusesMatch(preset.bonuses, bonuses)) {
                 this.preset = preset;
 
@@ -141,7 +138,7 @@ export default class RoomConfig extends BaseRoomConfig {
      * Get default preset
      */
     getDefaultPreset(): BasePreset {
-        return this.presets[0];
+        return RoomConfig.presets[0];
     }
 
     /**
