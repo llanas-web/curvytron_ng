@@ -8,7 +8,6 @@
             <span class="mute icon-mute" title="Mute" (click)="mute(message)"></span>
             {{ message.player.name }} :
         </span>
-        {{message.type}}
         <span class="message-content" [ngSwitch]="message.type">
             <span *ngSwitchCase="vote-kick">
                 <span *ngIf="!message.target.local && !message.target.kicked">

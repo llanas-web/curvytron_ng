@@ -29,14 +29,14 @@ export class Room extends BaseRoom {
      * Get local players
      */
     getLocalPlayers(): Collection<Player> {
-        return this.players.filter(function () { return this.local; });
+        return this.players.filter((player) => player.local);
     }
 
     /**
      * Get player by client Id
      */
-    getPlayerByClient(client: number): Player {
-        return this.players.match(function () { return this.client.id === client; });
+    getPlayerByClient(client: string): Player {
+        return this.players.match((player) => player.client.id === client);
     }
 
     /**
