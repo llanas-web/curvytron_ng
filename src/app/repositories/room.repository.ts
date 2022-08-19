@@ -335,8 +335,10 @@ export class RoomRepository extends EventEmitter {
      * On client add
      */
     @boundMethod
-    onClientAdd(e: any) {
-        this.clients.add(new Client(e.detail));
+    onClientAdd({client}: {client: Client}) {
+        console.log(client);
+        
+        this.clients.add(new Client(client.id));
     }
 
     /**

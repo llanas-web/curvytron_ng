@@ -37,6 +37,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
     room: Room;
     launching: number | boolean;
     displayParameters: boolean;
+    hasTouch: boolean;
 
     constructor (private socketClient: SocketClientService,
         private repository: RoomRepository,
@@ -53,7 +54,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
 
         this.chat = chat;
         this.notifier = notifier;
-        // this.hasTouch = typeof (window.ontouchstart) !== 'undefined';
+        this.hasTouch = typeof (window.ontouchstart) !== 'undefined';
         this.name = decodeURIComponent(roomName);
         this.password = typeof (password) !== 'undefined' ? password : null;
         this.controlSynchro = false;
@@ -63,16 +64,19 @@ export class RoomComponent extends EventEmitter implements OnInit {
         this.repository.start();
         // gamepadListener.start();
 
-        if (!this.profile.isComplete()) {
-            this.profile.on('close', this.joinRoom);
-            if (this.profile.controller.loaded) {
-                this.profile.controller.openProfile();
-            } else {
-                this.profile.controller.on('loaded', this.profile.controller.openProfile);
-            }
-        } else {
-            this.joinRoom();
-        }
+        // if (!this.profile.isComplete()) {
+        //     this.profile.on('close', this.joinRoom);
+        //     console.log(this.profile.controller)
+        //     if (this.profile.controller.loaded) {
+        //         this.profile.controller.openProfile();
+        //     } else {
+        //         this.profile.controller.on('loaded', () => {  
+        //             this.profile.controller.openProfile()
+        //         });
+        //     }
+        // } else {
+        this.joinRoom();
+        // }
     }
 
     ngOnInit() {
@@ -186,6 +190,10 @@ export class RoomComponent extends EventEmitter implements OnInit {
         if (this.launchInterval) {
             this.launchInterval = clearInterval(this.launchInterval);
         }
+    }
+
+    trackById(index: number, player: Player) {
+        return player.id;
     }
 
     /**
