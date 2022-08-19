@@ -437,8 +437,8 @@ export class RoomRepository extends EventEmitter {
      * On game master
      */
     @boundMethod
-    onRoomMaster(e: any) {
-        const master = this.clients.getById(e.detail.client);
+    onRoomMaster({client} : {client: Client}) {
+        const master = this.clients.getById(client);
 
         if (master) {
             this.setRoomMaster(master);

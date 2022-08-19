@@ -14,6 +14,7 @@ export class Player extends BasePlayer {
     vote = false;
     kicked = false;
     position: string;
+    profile = false;
     
     client: Client;
 

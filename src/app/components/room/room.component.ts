@@ -1,10 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseRoom } from '@shared/model/BaseRoom';
 import { boundMethod } from 'autobind-decorator';
 import { EventEmitter } from 'events';
+import { argv } from 'process';
 import { Player } from 'src/app/models/player.model';
+import { Room } from 'src/app/models/room.model';
 import { RoomRepository } from 'src/app/repositories/room.repository';
 import { ChatService } from 'src/app/services/chat.service';
 import { SocketClientService } from 'src/app/services/core/socket-client.service';
@@ -32,14 +34,14 @@ export class RoomComponent extends EventEmitter implements OnInit {
     controlSynchro: boolean;
     useTouch: boolean;
     launchInterval: any;
-    room: any;
+    room: Room;
     launching: number | boolean;
     displayParameters: boolean;
 
     constructor (private socketClient: SocketClientService,
         private repository: RoomRepository,
         private route: ActivatedRoute,
-        private location: Location,
+        private router: Router,
         private profile: ProfileService,
         private chat: ChatService,
         private notifier: NotifierService) {
@@ -117,16 +119,15 @@ export class RoomComponent extends EventEmitter implements OnInit {
      * Go back to the homepage
      */
     goHome() {
-        this.location.go('/');
+        this.router.navigate(['/']);
     }
 
     /**
      * Update current message
      */
     updateCurrentMessage() {
-        const profile = this.room.players.match(function () { return this.profile; });
-        const player = this.room.players.match(function () { return this.local; });
-
+        const profile = this.room.players.match((player) => player.profile);
+        const player = this.room.players.match((player) => player.local);
         this.chat.setPlayer(profile ? profile : player);
     }
 
@@ -220,11 +221,11 @@ export class RoomComponent extends EventEmitter implements OnInit {
      * Leave room
      */
     @boundMethod
-    leaveRoom() {
-        const path = this.location.go('/');
+    async leaveRoom() {
+        const path = await this.router.navigate(['/']);
 
         if (this.room) {
-            if (path !== this.room.getGameUrl()) {
+            if (path) {
                 this.repository.leave();
             }
 
@@ -306,8 +307,8 @@ export class RoomComponent extends EventEmitter implements OnInit {
      * On join
      */
     @boundMethod
-    onJoin(e: any) {
-        const player = e.detail.player;
+    onJoin(message: any) {
+        const player = message.player;
 
         if (player.client.id === this.socketClient.id) {
             player.on('control:change', this.onControlChange);
@@ -408,7 +409,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
         const players = this.room.getLocalPlayers();
 
         for (let i = players.items.length - 1; i >= 0; i--) {
-            players.items[i].setTouch();
+            // players.items[i].setTouch();
         }
     }
 
@@ -418,7 +419,9 @@ export class RoomComponent extends EventEmitter implements OnInit {
     @boundMethod
     start(e: any) {
         const passwordQuery = (this.room.config.open) ? `password=${this.room.config.password}` : '';
-        this.location.go(this.room.getGameUrl(), passwordQuery);
+        this.router.navigate([this.room.getGameUrl()], {
+            queryParams: { password: passwordQuery }
+        });
     }
 
     /**
