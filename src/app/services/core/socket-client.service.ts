@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseSocketClient } from '@shared/core/BaseSocketClient';
+import { BaseSocketClient } from './base-socket-client';
 import { boundMethod } from 'autobind-decorator';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class SocketClientService extends BaseSocketClient {
         // super(new window.WebSocket(protocol + document.location.host + document.location.pathname, ['websocket']));
         // tslint:disable-next-line: no-string-literal
         const socket = window['WebSocket'] || window['MozWebSocket'];
-        super(new socket(protocol + 'localhost:8090', ['websocket']));
+        super(new socket(protocol + 'localhost:8090', ['websocket']) as WebSocket);
 
         this.id = null;
         this.connected = false;
