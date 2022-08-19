@@ -19,7 +19,7 @@ export class RoomRepository extends EventEmitter {
 
     room: Room;
     master: any;
-    clients: any;
+    clients: Collection<Client>;
     playerCache: any;
 
     constructor (private client: SocketClientService) {
@@ -354,6 +354,10 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onJoinRoom({player}: {player: SerializedBasePlayer}) {
+        console.log(player.client);
+        console.dir(this.clients.items);
+        console.log(this.clients.getById(player.client));
+        
         const newPlayer = new Player(
             player.id,
             this.clients.getById(player.client),
@@ -425,13 +429,13 @@ export class RoomRepository extends EventEmitter {
      * On player toggle ready
      */
     @boundMethod
-    onPlayerReady(e: any) {
-        const data = e.detail;
-        const player = this.room.players.getById(data.player);
+    onPlayerReady({ player, ready }: {player: number, ready: boolean}) {
+        
+        const _player = this.room.players.getById(player);
 
-        if (player) {
-            player.toggleReady(data.ready);
-            this.emit('player:ready', { player });
+        if (_player) {
+            _player.toggleReady(ready);
+            this.emit('player:ready', { player: _player });
         }
     }
 
@@ -440,7 +444,7 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onRoomMaster({client} : {client: Client}) {
-        const master = this.clients.getById(client);
+        const master = this.clients.getById(client.id);
 
         if (master) {
             this.setRoomMaster(master);

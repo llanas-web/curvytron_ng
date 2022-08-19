@@ -1,6 +1,6 @@
 export class Collection<T> {
 
-    ids: string[] = [];
+    ids: Array<string|number> = [];
     items: T[] = [];
     key: string;
     index: boolean;
@@ -131,7 +131,7 @@ export class Collection<T> {
     /**
      * Get an element by its id
      */
-    getById(id: string): T {
+    getById(id: string | number): T {
         const index = this.ids.indexOf(id);
 
         return index >= 0 ? this.items[index] : null;
