@@ -3,16 +3,9 @@ import Message from './message.model';
 
 export default class MessageVoteKick extends Message {
 
-    /**
-     * Message type
-     */
-    static type = 'vote-kick';
 
-    /**
-     * Default icon
-     */
-    static icon = 'icon-megaphone';
-
+    type = 'vote-kick';
+    icon = 'icon-megaphone';
     target: Player;
 
     constructor (target: Player) {

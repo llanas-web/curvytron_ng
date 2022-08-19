@@ -1,0 +1,68 @@
+.room-chat {
+    float: left;
+    width: 32%;
+    padding-right: 30px; }
+    .room .room-chat .chat-wrapper {
+      margin-top: 50px; }
+      .room .room-chat .chat-wrapper .feed {
+        position: relative;
+        height: 400px;
+        max-height: 400px; }
+      .room .room-chat .chat-wrapper .action-line {
+        margin-top: 10px;
+        height: 60px;
+        position: relative;
+        overflow: hidden; }
+        .room .room-chat .chat-wrapper .action-line .form-control {
+          height: 60px;
+          font-size: 16px;
+          background: #FFF;
+          border: 0;
+          padding-right: 85px; }
+          .room .room-chat .chat-wrapper .action-line .form-control:focus {
+            border-color: #666; }
+        .room .room-chat .chat-wrapper .action-line .btn {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          height: 60px;
+          width: 80px;
+          text-align: center;
+          border: 0;
+          border-left: 10px solid #F3F3F3;
+          color: #FFF;
+          margin: 0 -10px 0 20px;
+          padding: 0 25px 0 15px;
+          background-color: #ff8069;
+          background-image: -moz-linear-gradient(left, #ff8069 0%, #ff6e90 100%);
+          background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, #ff8069), color-stop(100%, #ff6e90));
+          background-image: -webkit-linear-gradient(left, #ff8069 0%, #ff6e90 100%);
+          background-image: -o-linear-gradient(left, #ff8069 0%, #ff6e90 100%);
+          background: -ms-linear-gradient(left, #ff8069 0%, #ff6e90 100%);
+          background: linear-gradient(to right, #ff8069 0%, #ff6e90 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 );
+          -webkit-transform: skew(-10deg, 0);
+          -moz-transform: skew(-10deg, 0);
+          -ms-transform: skew(-10deg, 0);
+          -o-transform: skew(-10deg, 0);
+          transform: skew(-10deg, 0);
+          -webkit-transition: all 0.1s linear;
+          -o-transition: all 0.1s linear;
+          transition: all 0.1s linear;
+          -webkit-backface-visibility: hidden;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none; }
+          .room .room-chat .chat-wrapper .action-line .btn span {
+            display: block;
+            -webkit-transform: skew(10deg, 0);
+            -moz-transform: skew(10deg, 0);
+            -ms-transform: skew(10deg, 0);
+            -o-transform: skew(10deg, 0);
+            transform: skew(10deg, 0);
+            -webkit-backface-visibility: hidden; }
+          .room .room-chat .chat-wrapper .action-line .btn:hover {
+            padding-right: 20px; }
+  

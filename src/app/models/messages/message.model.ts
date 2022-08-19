@@ -3,11 +3,6 @@ import { BaseMessage } from '@shared/model/BaseMessage';
 export default class Message extends BaseMessage {
 
     /**
-     * Message type
-     */
-    static type = 'default';
-
-    /**
      * Default color
      */
     static color = '#75858c';
@@ -18,11 +13,6 @@ export default class Message extends BaseMessage {
     static messageName = 'Anonymous';
 
     /**
-     * Default icon
-     */
-    static icon = null;
-
-    /**
      * Message max length
      */
     static maxLength = 140;
@@ -31,6 +21,8 @@ export default class Message extends BaseMessage {
     creation: Date;
     date: string;
     content = '';
+    type = 'default';
+    icon = null;
 
     constructor (creation?: number | Date) {
 
@@ -63,4 +55,13 @@ export default class Message extends BaseMessage {
         return hours + ':' + minutes;
     }
 
+}
+
+export interface SerializedMessage {
+    
+    client: string;
+    content: string;
+    creation: number,
+    name: string;
+    color: string;
 }

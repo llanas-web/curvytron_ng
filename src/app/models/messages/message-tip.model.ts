@@ -3,16 +3,6 @@ import Message from './message.model';
 export default class MessageTip extends Message {
 
     /**
-     * Message type
-     */
-    static type = 'tip';
-
-    /**
-     * Default icon
-     */
-    static icon = 'icon-megaphone';
-
-    /**
      * Tips
      */
     static tips = [
@@ -26,6 +16,10 @@ export default class MessageTip extends Message {
         'Making a Snail™ is a sure way to win, but other players might hate you for it.',
         'The Enrichment Center regrets to inform you that this next test is impossible. Make no attempt to solve it.'
     ];
+
+    
+    type = 'tip';
+    icon = 'icon-megaphone';
 
     constructor () {
         super();

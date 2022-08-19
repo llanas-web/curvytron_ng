@@ -10,7 +10,7 @@ import MessagePlayer from '../models/messages/message-player.model';
 import MessageRoomMaster from '../models/messages/message-room-master.model';
 import MessageTip from '../models/messages/message-tip.model';
 import MessageVoteKick from '../models/messages/message-vote-kick.model';
-import Message from '../models/messages/message.model';
+import Message, { SerializedMessage } from '../models/messages/message.model';
 import { Player } from '../models/player.model';
 import { RoomRepository } from '../repositories/room.repository';
 import { SocketClientService } from './core/socket-client.service';
@@ -35,7 +35,7 @@ export class ChatService extends BaseChat {
         this.messages.index = false;
 
         this.client = client;
-        this.message = new MessagePlayer(this.client);
+        this.message = new MessagePlayer(this.client.id);
         this.room = null;
         this.element = null;
         this.auto = true;
@@ -241,7 +241,7 @@ export class ChatService extends BaseChat {
         if (this.message.content.length) {
             this.client.addEvent(
                 'room:talk',
-                this.message.content.substr(0, Message.maxLength),
+                this.message.content.slice(0, Message.maxLength),
                 (result) => {
                     if (result.success) {
                         this.message.clear();
@@ -257,13 +257,13 @@ export class ChatService extends BaseChat {
      * On talk
      */
     @boundMethod
-    onTalk(e: any) {
-        if (typeof (e.detail) !== 'undefined' && e.detail) {
+    onTalk(message: SerializedMessage) {
+        if (message) {
             this.addMessage(new MessagePlayer(
-                e.detail.client,
-                e.detail.content,
-                this.getPlayer(e.detail),
-                e.detail.creation
+                message.client,
+                message.content,
+                this.getPlayer(message),
+                message.creation
             ));
         }
     }

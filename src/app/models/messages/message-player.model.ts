@@ -5,15 +5,11 @@ import Message from './message.model';
 
 export default class MessagePlayer extends Message {
 
-    /**
-     * Message type
-     */
-    static type = 'player';
-
-    content: any;
+    type = 'player';
     player: any;
 
-    constructor (private socketClient: SocketClientService,
+    constructor (
+        client: string,
         content?: string,
         player?: Player,
         creation?: number) {

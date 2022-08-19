@@ -16,7 +16,7 @@
 
         <form (ng-submit)="addPlayer()" class="top-right-form" name="addPlayer">
             <button type="submit" id="submit"><span><i class="icon-plus"></i></span></button>
-            <input type="text" id="add-user-name" (ng-model)="name" class="form-control" name="username"
+            <input type="text" id="add-user-name" [(ngModel)]="name" class="form-control" name="username"
                 placeholder="Add a local player" attr.maxlength="{{ nameMaxLength }}" />
             <div class="clearfix"></div>
         </form>
@@ -126,9 +126,11 @@
                     </ng-container>
                 </tbody>
             </table>
+            <!-- <div class="room-chat" ng-controller="ChatController">
+                <div class="chat-wrapper" ng-include="'js/views/chat/chat.html'" onload="chatLoaded()"></div> -->
 
-            <div class="room-chat" ng-controller="ChatController">
-                <div class="chat-wrapper" ng-include="'js/views/chat/chat.html'" onload="chatLoaded()"></div>
+            <div class="room-chat">
+                <app-chat class="chat-wrapper"></app-chat>
             </div>
 
             <div class="clearfix"></div>

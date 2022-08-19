@@ -4,15 +4,8 @@ import Message from './message.model';
 
 export default class MessageRoomMaster extends Message {
 
-    /**
-     * Message type
-     */
-    static type = 'room-master';
-
-    /**
-     * Default icon
-     */
-    static icon = 'icon-megaphone';
+    type = 'room-master';
+    icon = 'icon-megaphone';
 
     client: Client;
     target: Player;
