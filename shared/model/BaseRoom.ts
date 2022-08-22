@@ -63,7 +63,7 @@ export class BaseRoom extends EventEmitter {
      * Is name available?
      */
     isNameAvailable(name: string): boolean {
-        return !this.players.match(() => this.name === name);
+        return !this.players.match((player) => player.name === name);
     }
 
     /**

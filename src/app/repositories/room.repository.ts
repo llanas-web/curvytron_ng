@@ -375,12 +375,12 @@ export class RoomRepository extends EventEmitter {
      * On leave room
      */
     @boundMethod
-    onLeaveRoom(e: any) {
-        const player = this.room.players.getById(e.detail.player);
+    onLeaveRoom({player}: {player: number}) {
+        const _player = this.room.players.getById(player);
 
-        if (player && this.room.removePlayer(player)) {
+        if (player && this.room.removePlayer(_player)) {
             this.playerCache.add(player);
-            this.emit('player:leave', { player });
+            this.emit('player:leave', { player: _player });
         }
     }
 
