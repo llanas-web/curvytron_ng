@@ -153,7 +153,6 @@ export abstract class BaseSocketClient extends EventEmitter {
    * Send an event
    */
   sendEvents(events: any) {
-    console.log(JSON.stringify(events));
     this.socket.send(JSON.stringify(events));
   }
 

@@ -192,7 +192,7 @@ export class PlayerInput extends EventEmitter {
       (el: string | number | Touch) => el === keyCode
     );
 
-    if (index >= 0) {
+    if (index != -1) {
       this.setActive(index, true);
     }
   }
