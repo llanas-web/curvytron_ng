@@ -1,54 +1,95 @@
 <div id="chat-feed" class="feed">
-    <div *ngFor="let message of messages.items" class="one-message">
-        <div class="details">
-            <span class="time">{{ message.date }}</span>
-        </div>
-        <span *ngIf="message.icon" class="message-icon {{ message.icon }}"></span>
-        <span *ngIf="!message.icon && message.player" class="message-icon message-name" [style.color]="message.player.color">
-            <span class="mute icon-mute" title="Mute" (click)="mute(message)"></span>
-            {{ message.player.name }} :
-        </span>
-        <span class="message-content" [ngSwitch]="message.type">
-            <span *ngSwitchCase="vote-kick">
-                <span *ngIf="!message.target.local && !message.target.kicked">
-                    Do you want to kick <span [style.color]="message.target.color">{{ message.target.name }}</span>?
-                    <span class="action" (click)="kickPlayer(message.target)">Yes!</span>
-                </span>
-                <span *ngIf="!message.target.local && message.target.kicked">
-                    Ongoing vote to kick <span [style.color]="message.target.color">{{ message.target.name }}</span>.
-                    <span class="action" (click)="kickPlayer(message.target)">Cancel?</span>
-                </span>
-                <span *ngIf="message.target.local">
-                    Ongoing vote to kick <span [style.color]="message.target.color">{{ message.target.name }}</span>.
-                </span>
-            </span>
-
-            <span *ngSwitchCase="kick">
-                <span *ngIf="message.target">
-                    Farewell <span [style.color]="message.target.color">{{ message.target.name }}</span>, you have been kicked.
-                </span>
-            </span>
-
-            <span *ngSwitchCase="room-master">
-                <span [style.color]="message.getTarget().color">{{ message.getTarget().name }}</span> is now the room master.
-            </span>
-
-            <span *ngSwitchCase="mute">
-                You muted <span [style.color]="message.player.color">{{ message.player.name }}</span>.
-                <span class="action" (click)="mute(message)">Cancel?</span>
-            </span>
-
-            <span *ngSwitchDefault>
-                {{ message.content }}
-            </span>
-        </span>
+  <div *ngFor="let message of messages.items" class="one-message">
+    <div class="details">
+      <span class="time">{{ message.date }}</span>
     </div>
+    <span *ngIf="message.icon" class="message-icon {{ message.icon }}"></span>
+    <span
+      *ngIf="!message.icon && message.player"
+      class="message-icon message-name"
+      [style.color]="message.player.color"
+    >
+      <span class="mute icon-mute" title="Mute" (click)="mute(message)"></span>
+      {{ message.player.name }} :
+    </span>
+    <span class="message-content" [ngSwitch]="message.type">
+      <span *ngSwitchCase="vote - kick">
+        <span *ngIf="!message.target.local && !message.target.kicked">
+          Do you want to kick
+          <span [style.color]="message.target.color">{{
+            message.target.name
+          }}</span
+          >?
+          <span class="action" (click)="kickPlayer(message.target)">Yes!</span>
+        </span>
+        <span *ngIf="!message.target.local && message.target.kicked">
+          Ongoing vote to kick
+          <span [style.color]="message.target.color">{{
+            message.target.name
+          }}</span
+          >.
+          <span class="action" (click)="kickPlayer(message.target)"
+            >Cancel?</span
+          >
+        </span>
+        <span *ngIf="message.target.local">
+          Ongoing vote to kick
+          <span [style.color]="message.target.color">{{
+            message.target.name
+          }}</span
+          >.
+        </span>
+      </span>
+
+      <span *ngSwitchCase="kick">
+        <span *ngIf="message.target">
+          Farewell
+          <span [style.color]="message.target.color">{{
+            message.target.name
+          }}</span
+          >, you have been kicked.
+        </span>
+      </span>
+
+      <span *ngSwitchCase="room - master">
+        <span [style.color]="message.getTarget().color">{{
+          message.getTarget().name
+        }}</span>
+        is now the room master.
+      </span>
+
+      <span *ngSwitchCase="mute">
+        You muted
+        <span [style.color]="message.player.color">{{
+          message.player.name
+        }}</span
+        >.
+        <span class="action" (click)="mute(message)">Cancel?</span>
+      </span>
+
+      <span *ngSwitchDefault>
+        {{ message.content }}
+      </span>
+    </span>
+  </div>
 </div>
 
-<form (ngSubmit)="submitTalk()" name="talk" class="action-line" autocomplete="off">
-    <button type="submit" class="btn btn-default">
-        <span><i class="icon-angle-right"></i></span>
-    </button>
-    <input type="text" name="currentMessage" [(ngModel)]="currentMessage.content" class="sent-message form-control" placeholder="Enter message..." maxlength="{{ messageMaxLength }}" />
-    <div class="clearfix"></div>
+<form
+  (ngSubmit)="submitTalk()"
+  name="talk"
+  class="action-line"
+  autocomplete="off"
+>
+  <button type="submit" class="btn btn-default">
+    <span><i class="icon-angle-right"></i></span>
+  </button>
+  <input
+    type="text"
+    name="currentMessage"
+    [(ngModel)]="currentMessage.content"
+    class="sent-message form-control"
+    placeholder="Enter message..."
+    maxlength="{{ messageMaxLength }}"
+  />
+  <div class="clearfix"></div>
 </form>

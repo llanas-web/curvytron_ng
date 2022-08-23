@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { SoundManagerService } from './sound-manager.service';
+import { SoundManagerService } from "./sound-manager.service";
 
-describe('SoundManagerService', () => {
+describe("SoundManagerService", () => {
   let service: SoundManagerService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('SoundManagerService', () => {
     service = TestBed.inject(SoundManagerService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

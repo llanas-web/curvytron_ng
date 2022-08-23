@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { SocketClientService } from './socket-client.service';
+import { SocketClientService } from "./socket-client.service";
 
-describe('SocketClientService', () => {
+describe("SocketClientService", () => {
   let service: SocketClientService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('SocketClientService', () => {
     service = TestBed.inject(SocketClientService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

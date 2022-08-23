@@ -1,7 +1,18 @@
-<button type="button" (click)="toggle()" class="profile-link" ng-class="{'complete': profileService.isComplete()}">
-    <span class="circle" *ngIf="profileService.isComplete()" [style.background-color]="profileService.color"></span>
-    <span class="name">
-        <span *ngIf="profileService.isComplete()">{{ profileService.name }}</span>
-        <span *ngIf="!profileService.isComplete()">What's your name<span class="question">?</span></span>
-    </span>
+<button
+  type="button"
+  (click)="toggle()"
+  class="profile-link"
+  ng-class="{ complete: profileService.isComplete() }"
+>
+  <span
+    class="circle"
+    *ngIf="profileService.isComplete()"
+    [style.background-color]="profileService.color"
+  ></span>
+  <span class="name">
+    <span *ngIf="profileService.isComplete()">{{ profileService.name }}</span>
+    <span *ngIf="!profileService.isComplete()"
+      >What's your name<span class="question">?</span></span
+    >
+  </span>
 </button>

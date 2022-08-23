@@ -1,14 +1,13 @@
 export abstract class BasePreset {
+  static presetName = "";
+  static bonuses = [];
 
-    static presetName = '';
-    static bonuses = [];
+  constructor() {}
 
-    constructor () { }
-
-    /**
-     * Has onus
-     */
-    hasBonus(bonus: string): boolean {
-        return BasePreset.bonuses.indexOf(bonus) > -1;
-    }
+  /**
+   * Has onus
+   */
+  hasBonus(bonus: string): boolean {
+    return BasePreset.bonuses.indexOf(bonus) > -1;
+  }
 }

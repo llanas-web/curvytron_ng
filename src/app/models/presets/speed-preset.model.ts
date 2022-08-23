@@ -1,21 +1,17 @@
-import { BasePreset } from '@shared/model/BasePreset';
+import { BasePreset } from "@shared/model/BasePreset";
 
 export default class SpeedPreset extends BasePreset {
+  /**
+   * Name
+   */
+  static presetName = "Speed of light";
 
-    /**
-     * Name
-     */
-    static presetName = 'Speed of light';
+  /**
+   * Bonuses
+   */
+  static bonuses = ["BonusSelfFast", "BonusEnemyFast"];
 
-    /**
-     * Bonuses
-     */
-    static bonuses = [
-        'BonusSelfFast',
-        'BonusEnemyFast'
-    ];
-
-    constructor () {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }

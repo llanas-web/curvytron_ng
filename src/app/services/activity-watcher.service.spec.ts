@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ActivityWatcherService } from './activity-watcher.service';
+import { ActivityWatcherService } from "./activity-watcher.service";
 
-describe('ActivityWatcherService', () => {
+describe("ActivityWatcherService", () => {
   let service: ActivityWatcherService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('ActivityWatcherService', () => {
     service = TestBed.inject(ActivityWatcherService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

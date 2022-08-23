@@ -1,25 +1,24 @@
-import { BasePreset } from '@shared/model/BasePreset';
+import { BasePreset } from "@shared/model/BasePreset";
 
 export default class SoloPreset extends BasePreset {
+  /**
+   * Name
+   */
+  static presetName = "Solo";
 
-    /**
-     * Name
-     */
-    static presetName = 'Solo';
+  /**
+   * Bonuses
+   */
+  static bonuses = [
+    "BonusSelfSmall",
+    "BonusSelfSlow",
+    "BonusSelfFast",
+    "BonusSelfMaster",
+    "BonusGameBorderless",
+    "BonusGameClear",
+  ];
 
-    /**
-     * Bonuses
-     */
-    static bonuses = [
-        'BonusSelfSmall',
-        'BonusSelfSlow',
-        'BonusSelfFast',
-        'BonusSelfMaster',
-        'BonusGameBorderless',
-        'BonusGameClear'
-    ];
-
-    constructor () {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }

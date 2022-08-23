@@ -1,9 +1,7 @@
 export abstract class BaseMessage {
-    constructor() {
+  constructor() {}
 
-    }
-
-    serialize() {
-        return '';
-    }
+  serialize() {
+    return "";
+  }
 }

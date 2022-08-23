@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { KillLogComponent } from './kill-log.component';
+import { KillLogComponent } from "./kill-log.component";
 
-describe('KillLogComponent', () => {
+describe("KillLogComponent", () => {
   let component: KillLogComponent;
   let fixture: ComponentFixture<KillLogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KillLogComponent ]
-    })
-    .compileComponents();
+      declarations: [KillLogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('KillLogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

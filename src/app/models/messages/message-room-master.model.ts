@@ -1,34 +1,32 @@
-import { Client } from '../client.model';
-import { Player } from '../player.model';
-import Message from './message.model';
+import { Client } from "../client.model";
+import { Player } from "../player.model";
+import Message from "./message.model";
 
 export default class MessageRoomMaster extends Message {
+  type = "room-master";
+  icon = "icon-megaphone";
 
-    type = 'room-master';
-    icon = 'icon-megaphone';
+  client: Client;
+  target: Player;
 
-    client: Client;
-    target: Player;
+  constructor(client: Client) {
+    super();
 
-    constructor (client: Client) {
+    this.client = client;
+    this.target = this.getPlayer();
+  }
+  /**
+   * Get target
+   */
+  getTarget(): Player {
+    const player = this.getPlayer();
 
-        super();
-
-        this.client = client;
-        this.target = this.getPlayer();
-    }
-    /**
-     * Get target
-     */
-    getTarget(): Player {
-        const player = this.getPlayer();
-
-        return player ? player : this.target;
-    }
-    /**
-     * Get player
-     */
-    getPlayer(): Player {
-        return this.client.players.getFirst();
-    }
+    return player ? player : this.target;
+  }
+  /**
+   * Get player
+   */
+  getPlayer(): Player {
+    return this.client.players.getFirst();
+  }
 }
