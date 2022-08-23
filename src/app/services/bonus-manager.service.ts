@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Collection } from "@shared/collection";
 import { BaseBonusManager } from "@shared/manager/BaseBonusManager";
-import { BaseBonus } from "@shared/model/BaseBonus";
 import { boundMethod } from "autobind-decorator";
 import { MapBonus } from "../models/bonus/map-bonus.model";
 import { Game } from "../models/game.model";
@@ -42,6 +41,7 @@ export class BonusManagerService extends BaseBonusManager {
 
   constructor(game: Game) {
     super(game);
+
     this.bonuses = new Collection<MapBonus>([], "id", true);
     this.bonuses.index = false;
 

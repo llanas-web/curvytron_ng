@@ -1,0 +1,8 @@
+<div class="waiting" *ngIf="!game.isReady()">
+  <p>Waiting for players...</p>
+  <ul>
+    <li *ngFor="let avatar of list; trackBy: trackById">
+      <span [style.color]="avatar.player.color">{{ avatar.name }}</span>
+    </li>
+  </ul>
+</div>

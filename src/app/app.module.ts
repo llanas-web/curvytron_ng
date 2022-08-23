@@ -11,6 +11,7 @@ import { LinkComponent } from './components/profile/link/link.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { GameComponent } from './components/game/game.component';
 import { KillLogComponent } from './components/game/kill-log/kill-log.component';
+import { WaitingComponent } from './components/game/waiting/waiting.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { KillLogComponent } from './components/game/kill-log/kill-log.component'
         ChatComponent,
         GameComponent,
         KillLogComponent,
+        WaitingComponent,
     ],
     imports: [
         BrowserModule,

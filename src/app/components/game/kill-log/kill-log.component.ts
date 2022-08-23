@@ -57,15 +57,15 @@ export class KillLogComponent extends EventEmitter implements OnInit {
    * On die
    */
   @boundMethod
-  onDie({ avatar }: { avatar: number }) {
-    var _avatar = this.game.avatars.getById(avatar);
+  onDie(e: { avatar: number } | any[]) {
+    var _avatar = this.game.avatars.getById(e[0]);
 
-    if (avatar) {
+    if (_avatar) {
       this.display(
         new MessageDie(
           _avatar,
-          e.detail[1] ? this.game.avatars.getById(e.detail[1]) : null,
-          e.detail[2]
+          e[1] ? this.game.avatars.getById(e[1]) : null,
+          e[2]
         )
       );
     }

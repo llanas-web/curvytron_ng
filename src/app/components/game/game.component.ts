@@ -20,7 +20,7 @@ export class GameComponent extends EventEmitter implements OnInit {
   static confirmation = "Are you sure you want to leave the game?";
 
   room: Room = null;
-  game: Game = null;
+  public game: Game = null;
   assetsLoaded = false;
   setup = false;
   spectateMessage = null;
@@ -182,17 +182,17 @@ export class GameComponent extends EventEmitter implements OnInit {
   @boundMethod
   onMove(e) {
     this.client.addEvent("player:move", {
-      avatar: e.detail.avatar.id,
-      move: e.detail.move ? e.detail.move : 0,
+      avatar: e.avatar.id,
+      move: e.move ? e.move : 0,
     });
   }
 
   @boundMethod
   onSpeeding(e) {
-    console.log("speedinge:" + e.detail.speeding);
+    console.log("speedinge:" + e.speeding);
     this.client.addEvent("player:speeding", {
-      avatar: e.detail.avatar.id,
-      speeding: e.detail.speeding ? e.detail.speeding : 1,
+      avatar: e.avatar.id,
+      speeding: e.speeding ? e.speeding : 1,
     });
   }
 

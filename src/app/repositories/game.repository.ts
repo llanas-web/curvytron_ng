@@ -8,7 +8,6 @@ import { RoomRepository } from "./room.repository";
 import { boundMethod } from "autobind-decorator";
 import { MapBonus } from "../models/bonus/map-bonus.model";
 import { StackedBonus } from "../models/bonus/stacked-bonus.model";
-import { SerializedBaseGame } from "@shared/model/BaseGame";
 import { Game } from "../models/game.model";
 
 /**
@@ -211,8 +210,8 @@ export class GameRepository extends EventEmitter {
    * @param {Event} e
    */
   @boundMethod
-  onPoint(e: { detail: any }) {
-    var avatar = this.game.avatars.getById(e.detail);
+  onPoint(e: string | number) {
+    var avatar = this.game.avatars.getById(e);
 
     if (avatar) {
       avatar.addPoint(avatar.x, avatar.y);
@@ -225,22 +224,20 @@ export class GameRepository extends EventEmitter {
    * @param {Event} e
    */
   @boundMethod
-  onAngle(e: { detail: any[] }) {
-    var avatar = this.game.avatars.getById(e.detail[0]);
+  onAngle(e: number[]) {
+    var avatar = this.game.avatars.getById(e[0]);
 
     if (avatar) {
-      avatar.setAngle(this.compressor.decompress(e.detail[1]));
+      avatar.setAngle(this.compressor.decompress(e[1]));
     }
   }
 
   /**
    * On die
-   *
-   * @param {Event} e
    */
   @boundMethod
   onDie(e: { detail: any[] }) {
-    var avatar = this.game.avatars.getById(e.detail[0]);
+    var avatar = this.game.avatars.getById(e[0]);
 
     if (avatar) {
       avatar.die();
@@ -250,16 +247,14 @@ export class GameRepository extends EventEmitter {
 
   /**
    * On bonus pop
-   *
-   * @param {Event} e
    */
   @boundMethod
   onBonusPop(e: { detail: any[] }) {
     var bonus = new MapBonus(
-      e.detail[0],
-      this.compressor.decompress(e.detail[1]),
-      this.compressor.decompress(e.detail[2]),
-      e.detail[3]
+      e[0],
+      this.compressor.decompress(e[1]),
+      this.compressor.decompress(e[2]),
+      e[3]
     );
 
     this.game.bonusManager.add(bonus);
@@ -268,12 +263,10 @@ export class GameRepository extends EventEmitter {
 
   /**
    * On bonus clear
-   *
-   * @param {Event} e
    */
   @boundMethod
-  onBonusClear(e: { detail: any }) {
-    var bonus = this.game.bonusManager.bonuses.getById(e.detail);
+  onBonusClear(e: string | number) {
+    var bonus = this.game.bonusManager.bonuses.getById(e);
 
     if (bonus) {
       this.game.bonusManager.remove(bonus);
@@ -283,24 +276,18 @@ export class GameRepository extends EventEmitter {
 
   /**
    * On bonus stack
-   *
-   * @param {Event} e
    */
   @boundMethod
   onBonusStack(e: { detail: any[] }) {
-    var avatar = this.game.avatars.getById(e.detail[0]);
+    var avatar = this.game.avatars.getById(e[0]);
 
     if (avatar && avatar.local) {
-      avatar.bonusStack[e.detail[1]](
-        new StackedBonus(e.detail[2], e.detail[3], e.detail[4])
-      );
+      avatar.bonusStack[e[1]](new StackedBonus(e[2], e[3], e[4]));
     }
   }
 
   /**
    * On round new
-   *
-   * @param {Event} e
    */
   @boundMethod
   onRoundNew(e: any) {
@@ -310,22 +297,16 @@ export class GameRepository extends EventEmitter {
 
   /**
    * On round new
-   *
-   * @param {Event} e
    */
   @boundMethod
-  onRoundEnd(e: { detail: any }) {
+  onRoundEnd(e: string | number) {
     this.game.endRound();
-    this.game.roundWinner = e.detail
-      ? this.game.avatars.getById(e.detail)
-      : null;
+    this.game.roundWinner = e ? this.game.avatars.getById(e) : null;
     this.emit("round:end");
   }
 
   /**
    * On clear
-   *
-   * @param {Event} e
    */
   @boundMethod
   onClear(e: any) {
@@ -334,12 +315,10 @@ export class GameRepository extends EventEmitter {
 
   /**
    * On borderless
-   *
-   * @param {Event} e
    */
   @boundMethod
-  onBorderless(e: { detail: any }) {
-    this.game.setBorderless(e.detail);
+  onBorderless(e: boolean) {
+    this.game.setBorderless(e);
     this.emit("borderless");
   }
 
@@ -361,8 +340,8 @@ export class GameRepository extends EventEmitter {
    * @param {Event} e
    */
   @boundMethod
-  onLeave(e: { detail: any }) {
-    var avatar = this.game.avatars.getById(e.detail);
+  onLeave(e: string | number) {
+    var avatar = this.game.avatars.getById(e);
 
     if (avatar) {
       this.game.removeAvatar(avatar);

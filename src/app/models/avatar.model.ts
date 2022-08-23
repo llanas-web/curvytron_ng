@@ -2,6 +2,7 @@ import { BaseAvatar } from "@shared/model/BaseAvatar";
 import { Canvas } from "../services/core/canvas";
 import { PlayerInput } from "./player-input.model";
 import { Player } from "./player.model";
+import { Trail } from "./trail.model";
 
 export class Avatar extends BaseAvatar {
   /**
@@ -32,10 +33,12 @@ export class Avatar extends BaseAvatar {
   };
   input: any;
   changed: any;
+  trail: Trail;
 
   constructor(player: Player) {
     super(player);
 
+    this.trail = new Trail(this);
     this.local = player.local;
 
     if (this.local) {

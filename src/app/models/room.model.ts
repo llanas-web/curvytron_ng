@@ -1,5 +1,6 @@
 import { Collection } from "@shared/collection";
 import { BaseRoom } from "@shared/model/BaseRoom";
+import { boundMethod } from "autobind-decorator";
 import { Game } from "./game.model";
 
 import { Player } from "./player.model";
@@ -54,6 +55,7 @@ export class Room extends BaseRoom {
   /**
    * Close game
    */
+  @boundMethod
   closeGame() {
     for (let i = this.players.items.length - 1; i >= 0; i--) {
       if (!this.players.items[i].avatar.present) {

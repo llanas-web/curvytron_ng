@@ -1,25 +1,38 @@
 <section>
-    <section id="game-wrapper">
-        <aside id="game-infos">
-            <header>
-                <a href="/#/" class="logo"><img src="assets/images/logo.svg" alt="Curvytron" id="logo" /> Curvytron</a>
-            </header>
-            <ng-template $ngIf="game">
-                <div class="maxScore">
-                    <i class="icon-trophy"></i>
-                    <span>{{ game.maxScore }}</span>
-                </div>
-                <h3 title="{{ game.name }}">{{ game.name }}</h3>
-    
-                <span id="sound" class="btn-toggle sound pull-right" [ngClass]="{ active: sound.active }" (click)="toggleSound()">
-                    <i class="icon-volume"></i>
-                </span>
-                <span id="radio-sound" class="btn-toggle radio-sound pull-right" [ngClass]="{ active: radio.enabled }" (click)="toggleRadio()">
-                    <i class="icon-radio"></i>
-                </span>
-            </ng-template>
+  <section id="game-wrapper">
+    <aside id="game-infos">
+      <header>
+        <a href="/#/" class="logo"
+          ><img src="assets/images/logo.svg" alt="Curvytron" id="logo" />
+          Curvytron</a
+        >
+      </header>
+      <ng-template $ngIf="game">
+        <div class="maxScore">
+          <i class="icon-trophy"></i>
+          <span>{{ game.maxScore }}</span>
+        </div>
+        <h3 title="{{ game.name }}">{{ game.name }}</h3>
 
-            <!-- <div class="game-players" ng-controller="PlayerListController">
+        <span
+          id="sound"
+          class="btn-toggle sound pull-right"
+          [ngClass]="{ active: sound.active }"
+          (click)="toggleSound()"
+        >
+          <i class="icon-volume"></i>
+        </span>
+        <span
+          id="radio-sound"
+          class="btn-toggle radio-sound pull-right"
+          [ngClass]="{ active: radio.enabled }"
+          (click)="toggleRadio()"
+        >
+          <i class="icon-radio"></i>
+        </span>
+      </ng-template>
+
+      <!-- <div class="game-players" ng-controller="PlayerListController">
                 <div *ngFor="let avatar of avatars; trackedBy trackById" id="avatar-{{avatar.id}}" class="player">
                     <span class="line-color-preview" [style.background-color]="avatar.player.color"></span>
                     <span class="arrow" [style.border-left-color]="avatar.player.color" *ngIf="avatar.local"></span>
@@ -42,22 +55,16 @@
                 <a href="http://www.elao.com" class="game-copy pull-left" target="_blank">Handmade by Elao with <i class="icon-love"></i></a>
             </footer> -->
 
-            <div class="room-chat">
-                <app-chat class="chat-wrapper"></app-chat>
-            </div>
-        </aside>
-        <div id="col-right">
-            <app-kill-log [game]="game"></app-kill-log>
-
-            <!-- <div class="waiting" *ngIf="!spectating && !game.isReady()" ng-controller="WaitingController">
-                <p>Waiting for players...</p>
-                <ul>
-                    <li ng-repeat="avatar in list track by avatar.id">
-                        <span [style.color]="avatar.player.color">{{ avatar.name }}</span>
-                    </li>
-                </ul>
-            </div> -->
-            <!-- <div ng-controller="RoundController">
+      <div class="room-chat">
+        <app-chat class="chat-wrapper"></app-chat>
+      </div>
+    </aside>
+    <div id="col-right">
+      <ng-template *ngIf="game">
+        <app-kill-log [game]="game"></app-kill-log>
+        <app-waiting [game]="game"></app-waiting>
+      </ng-template>
+      <!-- <div ng-controller="RoundController">
                 <div id="warmup" style="display: none;">
                     <p id="tie-break" class="tie-break" style="display: none;">Tie break</p>
                     <section class="countdown">
@@ -98,12 +105,12 @@
                     </div>
                 </div>
             </div> -->
-            <div id="render" class="game-render">
-                <canvas id="background" class="game-background"></canvas>
-                <canvas id="bonus" class="game-bonus"></canvas>
-                <canvas id="game" class="game-front"></canvas>
-                <canvas id="effect" class="game-effect"></canvas>
-            </div>
-        </div>
-    </section>
+      <div id="render" class="game-render">
+        <canvas id="background" class="game-background"></canvas>
+        <canvas id="bonus" class="game-bonus"></canvas>
+        <canvas id="game" class="game-front"></canvas>
+        <canvas id="effect" class="game-effect"></canvas>
+      </div>
+    </div>
+  </section>
 </section>
