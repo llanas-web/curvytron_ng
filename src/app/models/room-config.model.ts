@@ -1,4 +1,4 @@
-import BasePreset from '@shared/model/BasePreset';
+import { BasePreset } from '@shared/model/BasePreset';
 import { BaseRoomConfig } from '@shared/model/BaseRoomConfig';
 
 import CustomPreset from './presets/custom-preset.model';

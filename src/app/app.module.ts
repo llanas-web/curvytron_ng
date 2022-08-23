@@ -9,6 +9,8 @@ import { RoomComponent } from './components/room/room.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { LinkComponent } from './components/profile/link/link.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { GameComponent } from './components/game/game.component';
+import { KillLogComponent } from './components/game/kill-log/kill-log.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +20,8 @@ import { ChatComponent } from './components/chat/chat.component';
         RoomComponent,
         LinkComponent,
         ChatComponent,
+        GameComponent,
+        KillLogComponent,
     ],
     imports: [
         BrowserModule,

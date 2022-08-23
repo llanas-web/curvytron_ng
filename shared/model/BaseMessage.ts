@@ -1,4 +1,4 @@
-export class BaseMessage {
+export abstract class BaseMessage {
     constructor() {
 
     }

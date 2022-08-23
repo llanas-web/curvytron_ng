@@ -5,7 +5,7 @@ import { EventEmitter } from 'events';
 /**
  * BaseChat system
  */
-export class BaseChat extends EventEmitter {
+export abstract class BaseChat extends EventEmitter {
 
     messages: Collection<BaseMessage>;
 

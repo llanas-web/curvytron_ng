@@ -1,4 +1,4 @@
-export default class BasePreset {
+export abstract class BasePreset {
 
     static presetName = '';
     static bonuses = [];

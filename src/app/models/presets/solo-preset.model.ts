@@ -1,4 +1,4 @@
-import BasePreset from '@shared/model/BasePreset';
+import { BasePreset } from '@shared/model/BasePreset';
 
 export default class SoloPreset extends BasePreset {
 

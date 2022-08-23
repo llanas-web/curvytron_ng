@@ -1,0 +1,109 @@
+<section>
+    <section id="game-wrapper">
+        <aside id="game-infos">
+            <header>
+                <a href="/#/" class="logo"><img src="assets/images/logo.svg" alt="Curvytron" id="logo" /> Curvytron</a>
+            </header>
+            <ng-template $ngIf="game">
+                <div class="maxScore">
+                    <i class="icon-trophy"></i>
+                    <span>{{ game.maxScore }}</span>
+                </div>
+                <h3 title="{{ game.name }}">{{ game.name }}</h3>
+    
+                <span id="sound" class="btn-toggle sound pull-right" [ngClass]="{ active: sound.active }" (click)="toggleSound()">
+                    <i class="icon-volume"></i>
+                </span>
+                <span id="radio-sound" class="btn-toggle radio-sound pull-right" [ngClass]="{ active: radio.enabled }" (click)="toggleRadio()">
+                    <i class="icon-radio"></i>
+                </span>
+            </ng-template>
+
+            <!-- <div class="game-players" ng-controller="PlayerListController">
+                <div *ngFor="let avatar of avatars; trackedBy trackById" id="avatar-{{avatar.id}}" class="player">
+                    <span class="line-color-preview" [style.background-color]="avatar.player.color"></span>
+                    <span class="arrow" [style.border-left-color]="avatar.player.color" *ngIf="avatar.local"></span>
+                    <span class="round-points" id="avatar-round-score-{{ avatar.id }}"></span>
+                    <span class="player-name" title="{{ avatar.name }}">{{ avatar.name }}</span>
+                    <span class="score" id="avatar-score-{{ avatar.id }}">0</span>
+                </div>
+            </div>
+
+            <footer ng-controller="MetricController">
+                <span class="fps pull-right" [style.color]="fpsColor">
+                    {{ fps }} fps
+                </span>
+                <span class="ping pull-right" [style.color]="latencyColor">
+                    {{ latency }}ms
+                </span>
+                <span id="spectators" *ngIf="spectators" class="pull-right">
+                    {{ spectators }} <span class="icon-viewer"></span>
+                </span>
+                <a href="http://www.elao.com" class="game-copy pull-left" target="_blank">Handmade by Elao with <i class="icon-love"></i></a>
+            </footer> -->
+
+            <div class="room-chat">
+                <app-chat class="chat-wrapper"></app-chat>
+            </div>
+        </aside>
+        <div id="col-right">
+            <app-kill-log [game]="game"></app-kill-log>
+
+            <!-- <div class="waiting" *ngIf="!spectating && !game.isReady()" ng-controller="WaitingController">
+                <p>Waiting for players...</p>
+                <ul>
+                    <li ng-repeat="avatar in list track by avatar.id">
+                        <span [style.color]="avatar.player.color">{{ avatar.name }}</span>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- <div ng-controller="RoundController">
+                <div id="warmup" style="display: none;">
+                    <p id="tie-break" class="tie-break" style="display: none;">Tie break</p>
+                    <section class="countdown">
+                        <div id="count" class="count"></div>
+                    </section>
+                    <div class="countdown-anim"></div>
+                </div>
+                <div id="end" style="display: none;">
+                    <div id="game-view" class="recap-view {{ game.started ? 'round' : 'game' }}">
+                        <p class="victory" *ngIf="winner">
+                            <i class="icon-trophy"></i>
+                            <span class="strong" [style.color]="winner.color">
+                                {{ winner.name }}
+                            </span>
+                            won the {{ game.started ? 'round' : 'game' }} !
+                        </p>
+                        <p class="victory" *ngIf="!winner">
+                            <i class="icon-dead"></i>
+                            Oops, everybody died...
+                        </p>
+                        <div *ngIf="!game.started">
+                            <button ng-click="backToRoom()" type="button" class="btn btn-hero btn-back-to-room">
+                                Back to the room
+                            </button>
+                            <table class="table table-hover recap">
+                                <tbody>
+                                    <tr *ngFor="let avatar in avatars; trackedBy trackById">
+                                        <td class="rank">{{ ($index+1) }}</td>
+                                        <td class="name"><span [style.color]="avatar.player.color">{{ avatar.name }}</span></td>
+                                        <td class="points"><strong>{{ avatar.score }}</strong> points</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button ng-click="backToRoom()" type="button" class="btn btn-hero btn-back-to-room">
+                                Back to the room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div id="render" class="game-render">
+                <canvas id="background" class="game-background"></canvas>
+                <canvas id="bonus" class="game-bonus"></canvas>
+                <canvas id="game" class="game-front"></canvas>
+                <canvas id="effect" class="game-effect"></canvas>
+            </div>
+        </div>
+    </section>
+</section>
