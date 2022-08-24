@@ -148,9 +148,7 @@ export class GameComponent extends EventEmitter implements OnInit {
     if (this.game) {
       this.detachEvents();
 
-      var avatars = this.game.avatars.filter(function () {
-        return this.input;
-      }).items;
+      var avatars = this.game.avatars.filter((avatar) => avatar.input).items;
 
       for (var i = avatars.length - 1; i >= 0; i--) {
         avatars[i].input.off("move", this.onMove);

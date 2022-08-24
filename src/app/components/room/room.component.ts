@@ -139,9 +139,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
    * Save controls
    */
   saveProfileControls() {
-    const player = this.room.players.match(function () {
-      return this.profile;
-    });
+    const player = this.room.players.match((player) => player.profile);
 
     if (player && !this.controlSynchro) {
       this.controlSynchro = true;
@@ -453,9 +451,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
    */
   @boundMethod
   updateProfile() {
-    const player = this.room.players.match(function () {
-      return this.profile;
-    });
+    const player = this.room.players.match((player) => player.profile);
 
     if (player) {
       this.setProfileName(player);

@@ -120,11 +120,7 @@ export class Game extends BaseGame {
   isTieBreak(): boolean {
     var maxScore = this.maxScore;
 
-    return (
-      this.avatars.match(function () {
-        return this.score >= maxScore;
-      }) !== null
-    );
+    return this.avatars.match((avatar) => avatar.score >= maxScore) !== null;
   }
 
   /**
@@ -324,8 +320,8 @@ export class Game extends BaseGame {
   }
 
   @boundMethod
-  onDie(event: { detail: Avatar }) {
-    this.animations.push(new Explode(event.detail, this.effect));
+  onDie(avatar: Avatar) {
+    this.animations.push(new Explode(avatar, this.effect));
   }
 
   @boundMethod

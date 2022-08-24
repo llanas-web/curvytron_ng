@@ -91,9 +91,9 @@ export abstract class BaseRoom extends EventEmitter {
 
       this.emit("game:end", { room: this });
 
-      this.players = this.players.filter(function () {
-        return this.client;
-      });
+      this.players = this.players.filter(
+        (player: BasePlayer) => !!player.clientId
+      );
 
       for (let i = this.players.items.length - 1; i >= 0; i--) {
         this.players.items[i].reset();
@@ -108,9 +108,8 @@ export abstract class BaseRoom extends EventEmitter {
     return {
       name: this.name,
       players: full
-        ? this.players.map<SerializedBasePlayer>(function () {
-            return this.serialize();
-          }).items
+        ? this.players.map<SerializedBasePlayer>((player) => player.serialize())
+            .items
         : this.players.count(),
       game: this.game ? true : false,
       open: this.config.open,

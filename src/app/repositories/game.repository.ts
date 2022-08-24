@@ -30,27 +30,6 @@ export class GameRepository extends EventEmitter {
 
     this.compressor = new Compressor();
     this.game = null;
-
-    // this.start = this.start.bind(this);
-    // this.stop = this.stop.bind(this);
-    // this.draw = this.draw.bind(this);
-    // this.onGameStart = this.onGameStart.bind(this);
-    // this.onGameStop = this.onGameStop.bind(this);
-    // this.onBonusPop = this.onBonusPop.bind(this);
-    // this.onBonusClear = this.onBonusClear.bind(this);
-    // this.onBonusStack = this.onBonusStack.bind(this);
-    // this.onPosition = this.onPosition.bind(this);
-    // this.onAngle = this.onAngle.bind(this);
-    // this.onPoint = this.onPoint.bind(this);
-    // this.onDie = this.onDie.bind(this);
-    // this.onProperty = this.onProperty.bind(this);
-    // this.onRoundNew = this.onRoundNew.bind(this);
-    // this.onRoundEnd = this.onRoundEnd.bind(this);
-    // this.onClear = this.onClear.bind(this);
-    // this.onBorderless = this.onBorderless.bind(this);
-    // this.onEnd = this.onEnd.bind(this);
-    // this.onLeave = this.onLeave.bind(this);
-    // this.onSpectate = this.onSpectate.bind(this);
   }
 
   /**

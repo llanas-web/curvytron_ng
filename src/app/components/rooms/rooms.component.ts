@@ -116,9 +116,7 @@ export class RoomsComponent extends EventEmitter implements OnInit {
   @boundMethod
   quickPlay() {
     const room = this.repository.rooms
-      .filter(function () {
-        return !this.game;
-      })
+      .filter((room) => !room.game)
       .getRandomItem();
 
     if (room) {
