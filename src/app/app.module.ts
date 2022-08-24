@@ -13,6 +13,7 @@ import { GameComponent } from "./components/game/game.component";
 import { KillLogComponent } from "./components/game/kill-log/kill-log.component";
 import { WaitingComponent } from "./components/game/waiting/waiting.component";
 import { PlayerListComponent } from './components/game/player-list/player-list.component';
+import { MetricComponent } from './components/game/metric/metric.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PlayerListComponent } from './components/game/player-list/player-list.c
     KillLogComponent,
     WaitingComponent,
     PlayerListComponent,
+    MetricComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
