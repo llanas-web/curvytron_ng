@@ -1,0 +1,58 @@
+<div>
+  <div id="warmup" style="display: none">
+    <p id="tie-break" class="tie-break" style="display: none">Tie break</p>
+    <section class="countdown">
+      <div id="count" class="count"></div>
+    </section>
+    <div class="countdown-anim"></div>
+  </div>
+  <div id="end" style="display: none">
+    <div
+      id="game-view"
+      class="recap-view {{ game.started ? 'round' : 'game' }}"
+    >
+      <p class="victory" *ngIf="winner">
+        <i class="icon-trophy"></i>
+        <span class="strong" [style.color]="winner.color">
+          {{ winner.name }}
+        </span>
+        won the {{ game.started ? "round" : "game" }} !
+      </p>
+      <p class="victory" *ngIf="!winner">
+        <i class="icon-dead"></i>
+        Oops, everybody died...
+      </p>
+      <div *ngIf="!game.started">
+        <button
+          ng-click="backToRoom()"
+          type="button"
+          class="btn btn-hero btn-back-to-room"
+        >
+          Back to the room
+        </button>
+        <table class="table table-hover recap">
+          <tbody>
+            <tr *ngFor="let avatar of list; trackBy: trackById">
+              <td class="rank">{{ $index + 1 }}</td>
+              <td class="name">
+                <span [style.color]="avatar.player.color">{{
+                  avatar.name
+                }}</span>
+              </td>
+              <td class="points">
+                <strong>{{ avatar.score }}</strong> points
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button
+          (click)="backToRoom()"
+          type="button"
+          class="btn btn-hero btn-back-to-room"
+        >
+          Back to the room
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

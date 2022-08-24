@@ -31,34 +31,31 @@ export class NotifierService {
   /**
    * Notify
    */
-  notify(message: string, duration?: number, sound?: string) {
+  notify(message: string, duration?: number, sound = "notice") {
     if (!this.watcher.isActive() || !this.watcher.isFocused()) {
       this.display(message, duration);
     }
 
-    this.sound.play(typeof sound === "string" ? sound : "notice");
+    this.sound.play(sound);
   }
 
   /**
    * Notify inactive
    */
-  notifyInactive(message: string, duration: number, sound: string) {
+  notifyInactive(message: string, duration?: number, sound = "notice") {
     if (!this.watcher.isActive() || !this.watcher.isFocused()) {
       this.display(message, duration);
-      this.sound.play(typeof sound === "string" ? sound : "notice");
+      this.sound.play(sound);
     }
   }
 
   /**
    * Set message
    */
-  display(message: string, duration: number) {
+  display(message: string, duration = NotifierService.duration) {
     this.clearTimeout();
     this.write(message);
-    setTimeout(
-      this.clear,
-      typeof duration === "number" ? duration : NotifierService.duration
-    );
+    setTimeout(this.clear, duration);
   }
 
   /**

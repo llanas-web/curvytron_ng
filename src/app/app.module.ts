@@ -14,6 +14,7 @@ import { KillLogComponent } from "./components/game/kill-log/kill-log.component"
 import { WaitingComponent } from "./components/game/waiting/waiting.component";
 import { PlayerListComponent } from './components/game/player-list/player-list.component';
 import { MetricComponent } from './components/game/metric/metric.component';
+import { RoundComponent } from './components/game/round/round.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MetricComponent } from './components/game/metric/metric.component';
     WaitingComponent,
     PlayerListComponent,
     MetricComponent,
+    RoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
