@@ -12,6 +12,7 @@ import { ChatComponent } from "./components/chat/chat.component";
 import { GameComponent } from "./components/game/game.component";
 import { KillLogComponent } from "./components/game/kill-log/kill-log.component";
 import { WaitingComponent } from "./components/game/waiting/waiting.component";
+import { PlayerListComponent } from './components/game/player-list/player-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { WaitingComponent } from "./components/game/waiting/waiting.component";
     GameComponent,
     KillLogComponent,
     WaitingComponent,
+    PlayerListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

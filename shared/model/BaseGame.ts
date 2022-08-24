@@ -201,12 +201,12 @@ export abstract class BaseGame extends EventEmitter {
   /**
    * Sort avatars
    */
-  sortAvatars(avatars: Collection<BaseAvatar>): Collection<BaseAvatar> {
-    avatars = typeof avatars !== "undefined" ? avatars : this.avatars;
-    // tslint:disable-next-line: only-arrow-functions
-    avatars.sort(function (a, b) {
-      return a.score > b.score ? -1 : a.score < b.score ? 1 : 0;
-    });
+  sortAvatars(
+    avatars: Collection<BaseAvatar> = this.avatars
+  ): Collection<BaseAvatar> {
+    avatars.sort((avatarA, avatarB) =>
+      avatarA.score > avatarB.score ? -1 : avatarA.score < avatarB.score ? 1 : 0
+    );
     return avatars;
   }
 

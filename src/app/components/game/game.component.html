@@ -7,7 +7,7 @@
           Curvytron</a
         >
       </header>
-      <ng-template $ngIf="game">
+      <ng-template [ngIf]="game">
         <div class="maxScore">
           <i class="icon-trophy"></i>
           <span>{{ game.maxScore }}</span>
@@ -30,17 +30,10 @@
         >
           <i class="icon-radio"></i>
         </span>
+        <app-player-list [game]="game"></app-player-list>
       </ng-template>
 
-      <!-- <div class="game-players" ng-controller="PlayerListController">
-                <div *ngFor="let avatar of avatars; trackedBy trackById" id="avatar-{{avatar.id}}" class="player">
-                    <span class="line-color-preview" [style.background-color]="avatar.player.color"></span>
-                    <span class="arrow" [style.border-left-color]="avatar.player.color" *ngIf="avatar.local"></span>
-                    <span class="round-points" id="avatar-round-score-{{ avatar.id }}"></span>
-                    <span class="player-name" title="{{ avatar.name }}">{{ avatar.name }}</span>
-                    <span class="score" id="avatar-score-{{ avatar.id }}">0</span>
-                </div>
-            </div>
+      <!-- 
 
             <footer ng-controller="MetricController">
                 <span class="fps pull-right" [style.color]="fpsColor">

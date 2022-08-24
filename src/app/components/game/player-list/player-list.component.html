@@ -1,0 +1,20 @@
+<div class="game-players">
+  <div
+    *ngFor="let avatar of avatars; trackedBy: trackById"
+    id="avatar-{{ avatar.id }}"
+    class="player"
+  >
+    <span
+      class="line-color-preview"
+      [style.background-color]="avatar.player.color"
+    ></span>
+    <span
+      class="arrow"
+      [style.border-left-color]="avatar.player.color"
+      *ngIf="avatar.local"
+    ></span>
+    <span class="round-points" id="avatar-round-score-{{ avatar.id }}"></span>
+    <span class="player-name" title="{{ avatar.name }}">{{ avatar.name }}</span>
+    <span class="score" id="avatar-score-{{ avatar.id }}">0</span>
+  </div>
+</div>
