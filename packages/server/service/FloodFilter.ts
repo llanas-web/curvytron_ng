@@ -40,7 +40,7 @@ export class FloodFilter {
         let message: Message;
         const length = this.messages.count();
         for (let i = length - 1; i >= 0; i--) {
-            message = this.messages[i];
+            message = this.messages.items[i];
             if (message.client.id === id) {
                 history++;
             }

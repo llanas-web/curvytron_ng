@@ -80,7 +80,6 @@ export class RoomController extends EventEmitter {
                 messages: this.chat.serialize(100),
                 votes: this.kickManager.votes.map((vote: any) => client.serialize()).items
             });
-            this.socketGroup.addEvent('client:add', client.id);
             this.emit('client:add', { room: this.room, client });
         } else {
             callback({ success: false, error: 'Client ' + client.id + ' already in the room.' });
@@ -310,7 +309,7 @@ export class RoomController extends EventEmitter {
      * On talk
      */
     onTalk(client: ServerSocketClient, content: string, callback: (arg: any) => any) {
-        const message = new Message(client, content.substr(0, Message.maxLength));
+        const message = new Message(client, content.slice(0, Message.maxLength));
         const success = this.chat.addMessage(message);
         callback({ success });
         if (success) {
