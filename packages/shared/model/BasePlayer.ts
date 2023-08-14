@@ -22,7 +22,7 @@ export abstract class BasePlayer extends EventEmitter {
   ready: boolean;
 
   id: string = null;
-  protected abstract avatar: BaseAvatar;
+  avatar: BaseAvatar;
 
   maxLength: number;
   colorMaxLength: number;

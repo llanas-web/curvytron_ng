@@ -49,13 +49,13 @@ export abstract class BaseGame extends EventEmitter {
   name: string;
   room: BaseRoom;
   frame: any = null;
-  protected abstract avatars: Collection<BaseAvatar>;
+  avatars: Collection<BaseAvatar>;
   size: number;
   rendered: any;
   maxScore: number;
   fps: BaseFPSLogger;
   started: boolean;
-  abstract bonusManager: any;
+  abstract bonusManager: BaseBonusManager;
   inRound: boolean;
   borderless: boolean;
   world: any;
@@ -65,10 +65,12 @@ export abstract class BaseGame extends EventEmitter {
 
     this.room = room;
     this.name = room.name;
+    this.avatars = room.players.map<BaseAvatar>((player) => player.avatar);
+    this.size = this.getSize(this.avatars.count());
     this.rendered = null;
     this.maxScore = room.config.getMaxScore();
     this.fps = new BaseFPSLogger();
-    this.started = false;
+    this.started = false; // room.config.getBonuses(), room.config.getVariable('bonusRate')
     this.inRound = false;
   }
 
@@ -201,12 +203,11 @@ export abstract class BaseGame extends EventEmitter {
   /**
    * Sort avatars
    */
-  sortAvatars(
-    avatars: Collection<BaseAvatar> = this.avatars
-  ): Collection<BaseAvatar> {
-    avatars.sort((avatarA, avatarB) =>
-      avatarA.score > avatarB.score ? -1 : avatarA.score < avatarB.score ? 1 : 0
-    );
+  sortAvatars(avatars: Collection<BaseAvatar>): Collection<BaseAvatar> {
+    avatars = typeof avatars !== "undefined" ? avatars : this.avatars;
+    avatars.sort((a, b) => {
+      return a.score > b.score ? -1 : a.score < b.score ? 1 : 0;
+    });
     return avatars;
   }
 
@@ -284,6 +285,7 @@ export abstract class BaseGame extends EventEmitter {
   endRound() {
     if (this.inRound) {
       this.inRound = false;
+      this.onRoundEnd();
       setTimeout(this.stop, BaseGame.warmdownTime);
     }
   }

@@ -97,7 +97,7 @@ export class BaseRoomConfig extends EventEmitter implements IBaseRoomConfig {
   /**
    * Get variable
    */
-  getVariable(variable: string): string {
+  getVariable(variable: string): number | undefined {
     if (!this.variableExists(variable)) {
       return;
     }

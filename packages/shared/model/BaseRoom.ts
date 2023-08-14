@@ -26,9 +26,9 @@ export abstract class BaseRoom extends EventEmitter {
   static launchTime = 5000;
 
   name: string;
-  abstract players: Collection<BasePlayer>;
-  config: BaseRoomConfig;
-  abstract game: BaseGame;
+  players: Collection<BasePlayer>;
+  abstract config: BaseRoomConfig;
+  game: BaseGame;
   minPlayer: number;
   maxLength: number;
   launchTime: number;
@@ -38,8 +38,8 @@ export abstract class BaseRoom extends EventEmitter {
     super();
 
     this.name = name;
-    this.config = new BaseRoomConfig(this);
-    this.open = this.config.open;
+    this.players = new Collection<BasePlayer>([], "id", true);
+    this.open = true;
   }
 
   /**
@@ -60,7 +60,7 @@ export abstract class BaseRoom extends EventEmitter {
    * Is name available?
    */
   isNameAvailable(name: string): boolean {
-    return !this.players.match((player) => player.name === name);
+    return !this.players.match(() => this.name === name);
   }
 
   /**
@@ -91,9 +91,7 @@ export abstract class BaseRoom extends EventEmitter {
 
       this.emit("game:end", { room: this });
 
-      this.players = this.players.filter(
-        (player: BasePlayer) => !!player.clientId
-      );
+      this.players = this.players.filter((player) => !!player.clientId);
 
       for (let i = this.players.items.length - 1; i >= 0; i--) {
         this.players.items[i].reset();
