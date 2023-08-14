@@ -40,7 +40,7 @@ export class CurvytronServer extends EventEmitter {
       client.on("error", (error) => this.onError(client, error));
       WebSocket.on("error", (error) => this.onError(client, error));
       this.clients.add(client);
-      client.on("close", () => this.onSocketDisconnection(client));
+    //   client.on("close", () => this.onSocketDisconnection(client));
       WebSocket.on("close", () => {
         this.onSocketDisconnection(client);
       });

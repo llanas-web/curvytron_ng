@@ -7,7 +7,8 @@ import { Avatar } from './Avatar';
  * Player
  */
 export class Player extends BasePlayer {
-    protected avatar: Avatar;
+    
+    declare avatar: Avatar;
 
     /** OVERRIDE */
     client: ServerSocketClient;
@@ -25,7 +26,7 @@ export class Player extends BasePlayer {
         data.active = this.client.active;
         return data;
     }
-    
+
     /**
      * Get avatar
      */

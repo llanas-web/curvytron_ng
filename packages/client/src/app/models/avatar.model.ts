@@ -33,10 +33,10 @@ export class Avatar extends BaseAvatar {
   };
   input: any;
   changed: any;
-  trail: Trail;
+  declare trail: Trail;
 
   constructor(player: Player) {
-    super(player);
+    super(player.id, player.name, player.color);
 
     this.trail = new Trail(this);
     this.local = player.local;

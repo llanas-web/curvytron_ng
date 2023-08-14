@@ -13,13 +13,12 @@ export class Avatar extends BaseAvatar {
     printManager: any;
     body: AvatarBody;
 
-    /** OVERRIDE */
-    declare player: Player;
+    player: Player;
 
 
     constructor(player: Player) {
 
-        super(player);
+        super(player.id, player.name, player.color);
 
         this.bodyCount = 0;
         this.body = new AvatarBody(this.x, this.y, this);
@@ -113,7 +112,7 @@ export class Avatar extends BaseAvatar {
     /**
      * Set inverse
      */
-    setInverse(inverse: number) {
+    setInverse(inverse: boolean) {
         super.setInverse(inverse);
         this.emit('property', { avatar: this, property: 'inverse', value: this.inverse });
     }

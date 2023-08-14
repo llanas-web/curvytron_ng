@@ -18,7 +18,7 @@ export class Player extends BasePlayer {
   profile = false;
 
   client: Client;
-  avatar: Avatar;
+  declare avatar: Avatar;
 
   constructor(
     id: string,

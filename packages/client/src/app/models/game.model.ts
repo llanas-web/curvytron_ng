@@ -24,7 +24,7 @@ export class Game extends BaseGame {
   canvas: Canvas;
   background: Canvas;
   effect: Canvas;
-  avatars: Collection<Avatar>;
+  declare avatars: Collection<Avatar>;
   bonusManager: BonusManagerService;
   roundWinner = null;
 

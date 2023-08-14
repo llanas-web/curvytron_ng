@@ -1,7 +1,6 @@
 import { EventEmitter } from "events";
 
 import { BaseBonusStack } from "./BaseBonusStack";
-import { BasePlayer } from "./BasePlayer";
 import { BaseTrail } from "./BaseTrail";
 
 /**
@@ -46,12 +45,6 @@ export abstract class BaseAvatar extends EventEmitter {
    */
   static directionInLoop = true;
 
-  id: string;
-  name: string;
-  color: string;
-
-  player: BasePlayer;
-
   x = 0;
   y = 0;
   trail: any;
@@ -69,24 +62,19 @@ export abstract class BaseAvatar extends EventEmitter {
   speeding = 1;
   stamina = 3;
   staminaDate = Date.now();
+  velocity = BaseAvatar.velocity;
+  radius = BaseAvatar.radius;
+  inverse = BaseAvatar.inverse;
+  invincible = BaseAvatar.invincible;
+  directionInLoop = BaseAvatar.directionInLoop;
+  angularVelocityBase = BaseAvatar.angularVelocityBase;
+  staminaThreshold = BaseAvatar.staminaThreshold;
+  staminaBase = BaseAvatar.staminaBase;
+  trailLatency = BaseAvatar.trailLatency;
 
-  inverse: any;
-  angularVelocityBase: any;
-  staminaThreshold: any;
-  directionInLoop: any;
-  velocity: number;
-  staminaBase: any;
-  radius: number;
-  invincible: boolean;
-  trailLatency: number;
-
-  constructor(player: BasePlayer) {
+  constructor(public id: string, public name: string, public color: string) {
     super();
-
-    this.id = player.id;
-    this.name = player.name;
-    this.color = player.color;
-    this.player = player;
+    
     this.trail = new BaseTrail(this);
     this.bonusStack = new BaseBonusStack(this);
     // useless too? this.updateVelocities();
@@ -135,7 +123,7 @@ export abstract class BaseAvatar extends EventEmitter {
   updateSpeeding(speeding: number) {
     if (
       typeof speeding === "undefined" ||
-      this.stamina < BaseAvatar.prototype.staminaThreshold
+      this.stamina < BaseAvatar.staminaThreshold
     ) {
       this.speeding = 1;
     } else if (speeding > 1) {
@@ -198,7 +186,7 @@ export abstract class BaseAvatar extends EventEmitter {
    * Set velocity
    */
   setVelocity(velocity: number) {
-    velocity = Math.max(velocity, BaseAvatar.prototype.velocity / 2);
+    velocity = Math.max(velocity, BaseAvatar.velocity / 2);
     if (this.velocity !== velocity) {
       this.velocity = velocity;
       this.updateVelocities();
@@ -226,13 +214,13 @@ export abstract class BaseAvatar extends EventEmitter {
         console.log("No stamina !");
         this.speeding = 1;
       }
-    } else if (this.stamina < BaseAvatar.prototype.staminaBase) {
+    } else if (this.stamina < BaseAvatar.staminaBase) {
       if (this.staminaDate < Date.now() - 500) {
         this.stamina = this.stamina + 0.16;
         this.staminaDate = Date.now();
       }
-    } else if (this.stamina > BaseAvatar.prototype.staminaBase) {
-      this.stamina = BaseAvatar.prototype.staminaBase;
+    } else if (this.stamina > BaseAvatar.staminaBase) {
+      this.stamina = BaseAvatar.staminaBase;
     }
     const velocity = (this.velocity * speeding) / 1000;
     this.velocityX = Math.cos(this.angle) * velocity;
@@ -245,10 +233,9 @@ export abstract class BaseAvatar extends EventEmitter {
    */
   updateBaseAngularVelocity() {
     if (this.directionInLoop) {
-      const ratio = this.velocity / BaseAvatar.prototype.velocity;
+      const ratio = this.velocity / BaseAvatar.velocity;
       this.angularVelocityBase =
-        ratio * BaseAvatar.prototype.angularVelocityBase +
-        Math.log(1 / ratio) / 1000;
+        ratio * BaseAvatar.angularVelocityBase + Math.log(1 / ratio) / 1000;
       this.updateAngularVelocity();
     }
   }
@@ -257,13 +244,13 @@ export abstract class BaseAvatar extends EventEmitter {
    * Set radius
    */
   setRadius(radius: number) {
-    this.radius = Math.max(radius, BaseAvatar.prototype.radius / 8);
+    this.radius = Math.max(radius, BaseAvatar.radius / 8);
   }
 
   /**
    * Set inverse
    */
-  setInverse(inverse: number) {
+  setInverse(inverse: boolean) {
     if (this.inverse !== inverse) {
       this.inverse = inverse ? true : false;
       this.updateAngularVelocity();
@@ -355,10 +342,10 @@ export abstract class BaseAvatar extends EventEmitter {
     this.velocityY = 0;
     this.angularVelocity = 0;
     this.roundScore = 0;
-    this.velocity = BaseAvatar.velocity;
     this.alive = true;
     this.printing = false;
-    this.color = this.player.color;
+    this.color = this.color;
+    this.velocity = BaseAvatar.velocity;
     this.radius = BaseAvatar.radius;
     this.inverse = BaseAvatar.inverse;
     this.invincible = BaseAvatar.invincible;

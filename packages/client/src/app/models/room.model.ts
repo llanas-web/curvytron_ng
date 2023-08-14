@@ -11,8 +11,8 @@ import RoomConfig from "./room-config.model";
  */
 export class Room extends BaseRoom {
   // OVERRIDE
-  players: Collection<Player>;
-  game: Game;
+  declare players: Collection<Player>;
+  declare game: Game;
   declare config: RoomConfig;
 
   constructor(name: string) {
