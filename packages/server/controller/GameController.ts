@@ -220,7 +220,7 @@ export class GameController {
      * Count spectators
      */
     countSpectators(): number {
-        return this.clients.filter(function () { return !this.isPlaying(); }).count();
+        return this.clients.filter((client) => !client.isPlaying()).count();
     }
 
     /**

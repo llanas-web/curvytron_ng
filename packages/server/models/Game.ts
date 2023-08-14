@@ -25,10 +25,9 @@ export class Game extends BaseGame {
     /** OVERRIDE */
     declare world: World;
     declare room: Room;
-    declare avatars: Collection<Avatar>;
     declare bonusManager: BonusManager;
 
-    getLoadingAvatars: () => Collection<Avatar>;
+    avatars: Collection<Avatar> = new Collection<Avatar>();
 
     constructor(room: Room) {
         super(room);
@@ -38,7 +37,9 @@ export class Game extends BaseGame {
         this.bonusStack = new GameBonusStack(this);
         this.roundWinner = null;
         this.gameWinner = null;
-        this.deathInFrame = false;
+        this.deathInFrame = false;        
+        
+        this.avatars = this.room.players.map<Avatar>(player => player.getAvatar() as Avatar)
 
         let avatar: Avatar;
         let i: number;
@@ -123,7 +124,7 @@ export class Game extends BaseGame {
             return true;
         }
         const maxScore = this.maxScore;
-        const players = this.avatars.filter(function () { return this.present && this.score >= maxScore; });
+        const players = this.avatars.filter((avatar) => avatar.present && avatar.score >= maxScore);
         if (players.count() === 0) {
             return null;
         }
@@ -162,7 +163,7 @@ export class Game extends BaseGame {
         if (this.avatars.count() === 1) {
             winner = this.avatars.getFirst();
         } else {
-            winner = this.avatars.match(function () { return this.alive; });
+            winner = this.avatars.match((avatar) => avatar.alive);
         }
         if (winner) {
             winner.addScore(Math.max(this.avatars.count() - 1, 1));
