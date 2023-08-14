@@ -2,8 +2,7 @@
     "name": "curvytron-ng",
     "version": "0.0.0",
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
+        "serve": "ng serve",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
@@ -23,6 +22,7 @@
         "install": "^0.13.0",
         "module-alias": "^2.2.2",
         "npm": "^8.17.0",
+        "ws": "~8.13.0",
         "rxjs": "~6.5.4",
         "rxjs-websockets": "^8.0.0",
         "soundjs": "^1.0.1",

@@ -1,13 +1,14 @@
+import { boundMethod } from "autobind-decorator";
 import { Collection } from "@shared/collection";
 import { BaseBonus } from "@shared/model/BaseBonus";
 import { BaseGame } from "@shared/model/BaseGame";
-import { boundMethod } from "autobind-decorator";
 import { EventEmitter } from "events";
 
 /**
  * Base Bonus Manager
  */
 export class BaseBonusManager extends EventEmitter {
+
   /**
    * Maximum number of bonus on the map at the same time
    */
@@ -22,6 +23,8 @@ export class BaseBonusManager extends EventEmitter {
    * Margin from bonus to trails
    */
   static bonusPopingMargin = 0.01;
+
+  static assets = {};
 
   game: BaseGame;
   bonuses: Collection<BaseBonus>;

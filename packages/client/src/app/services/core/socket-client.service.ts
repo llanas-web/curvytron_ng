@@ -18,9 +18,9 @@ export class SocketClientService extends BaseSocketClient {
         this.id = null;
         this.connected = false;
 
-        this.socket.addEventListener('open', this.onOpen);
-        this.socket.addEventListener('error', this.onError);
-        this.socket.addEventListener('close', this.onClose);
+        this.socket.addEventListener('open', () => this.onOpen);
+        this.socket.addEventListener('error', () => this.onError);
+        this.socket.addEventListener('close', () => this.onClose);
     }
 
     /**

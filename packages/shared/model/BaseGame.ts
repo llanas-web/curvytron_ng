@@ -203,7 +203,7 @@ export abstract class BaseGame extends EventEmitter {
   /**
    * Sort avatars
    */
-  sortAvatars(avatars: Collection<BaseAvatar>): Collection<BaseAvatar> {
+  sortAvatars(avatars?: Collection<BaseAvatar>): Collection<BaseAvatar> {
     avatars = typeof avatars !== "undefined" ? avatars : this.avatars;
     avatars.sort((a, b) => {
       return a.score > b.score ? -1 : a.score < b.score ? 1 : 0;

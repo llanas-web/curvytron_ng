@@ -1,93 +1,107 @@
-import { Collection } from '@shared/collection';
-import { BaseSocketClient } from '@shared/core/BaseSocketClient';
-import { TickrateLogger } from '@shared/service/TickrateLogger';
-import { boundMethod } from 'autobind-decorator';
-import * as WebSocket from 'ws';
+import { Collection } from "@shared/collection";
+import { BaseSocketClient } from "@shared/core/BaseSocketClient";
+import { TickrateLogger } from "@shared/service/TickrateLogger";
+import { boundMethod } from "autobind-decorator";
+import * as WebSocket from "ws";
 
-import { PingLogger } from './PingLogger.ts';
+import { PingLogger } from "./PingLogger";
 
 export class ServerSocketClient extends BaseSocketClient {
+  static pingInterval = 1000;
 
-    static pingInterval = 1000;
+  ip: string;
+  active = true;
+  players: Collection<any>;
+  pingLogger: PingLogger;
+  tickrate: TickrateLogger;
 
-    ip: string;
-    active = true;
-    players: Collection<any>;
-    pingLogger: PingLogger;
-    tickrate: TickrateLogger;
+  constructor(socket: WebSocket, interval: number, ip: string) {
+    super(socket, interval);
 
-    constructor(socket: WebSocket, interval: number, ip: string) {
+    this.ip = ip;
+    this.id = null;
+    this.players = new Collection([], "id");
+    this.pingLogger = new PingLogger(this.socket);
+    this.tickrate = new TickrateLogger();
+    this.on("whoami", this.identify);
+    this.on("activity", this.onActivity);
+    this.pingLogger.on("latency", this.onLatency);
+  }
 
-        super(socket, interval);
+  /**
+   * Is this client playing?
+   */
+  isPlaying(): boolean {
+    return !this.players.isEmpty();
+  }
 
-        this.ip = ip;
-        this.id = null;
-        this.players = new Collection([], 'id');
-        this.pingLogger = new PingLogger(this.socket);
-        this.tickrate = new TickrateLogger();
-        this.on('whoami', this.identify);
-        this.on('activity', this.onActivity);
-        this.pingLogger.on('latency', this.onLatency);
-    }
+  /**
+   * Clear players
+   */
+  clearPlayers() {
+    this.emit("players:clear", this);
+    this.players.clear();
+  }
 
-    /**
-     * Is this client playing?
-     */
-    isPlaying(): boolean {
-        return !this.players.isEmpty();
-    }
+  /**
+   * Send an event
+   */
+  sendEvents(events: any) {
+    this.tickrate.tick(events);
+    super.sendEvents.call(this, events);
+  }
+  /**
+   * Stop
+   */
+  stop() {
+    super.stop.call(this);
+    this.pingLogger.stop();
+    this.tickrate.stop();
+  }
+  /**
+   * Object version of the client
+   */
+  serialize(): any {
+    const data = super.serialize.call(this);
+    data.active = this.active;
+    return data;
+  }
 
-    /**
-     * Clear players
-     */
-    clearPlayers() {
-        this.emit('players:clear', this);
-        this.players.clear();
-    }
+  /**
+   * On ping logger latency value
+   */
+  onLatency(latency: any) {
+    this.addEvent("latency", latency, null, true);
+  }
 
-    /**
-     * Send an event
-     */
-    sendEvents(events: any) {
-        this.tickrate.tick(events);
-        super.sendEvents.call(this, events);
-    }
-    /**
-     * Stop
-     */
-    stop() {
-        super.stop.call(this);
-        this.pingLogger.stop();
-        this.tickrate.stop();
-    }
-    /**
-     * Object version of the client
-     */
-    serialize(): any {
-        const data = super.serialize.call(this);
-        data.active = this.active;
-        return data;
-    }
+  /**
+   * On activity change
+   */
+  onActivity(active: any) {
+    this.active = active;
+  }
 
-    /**
-     * On ping logger latency value
-     */
-    onLatency(latency: any) {
-        this.addEvent('latency', latency, null, true);
-    }
+  /**
+   * Who am I?
+   */
+  @boundMethod
+  identify(event: any) {
+    event[1](this.id);
+  }
 
-    /**
-     * On activity change
-     */
-    onActivity(active: any) {
-        this.active = active;
-    }
+  /**
+   * Attach events
+   */
+  attachEvents() {
+    this.socket.addListener("message", this.onMessage);
+    this.socket.addListener("close", this.onClose);
+  }
 
-    /**
-     * Who am I?
-     */
-    @boundMethod
-    identify(event: any) {
-        event[1](this.id);
-    }
+  /**
+   * Detach events
+   */
+  detachEvents() {
+    this.socket.removeListener("message", this.onMessage);
+    this.socket.removeListener("close", this.onClose);
+  }
 }

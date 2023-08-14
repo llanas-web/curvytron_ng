@@ -68,18 +68,12 @@ export abstract class BaseSocketClient extends EventEmitter {
   /**
    * Attach events
    */
-  attachEvents() {
-    this.socket.addListener("message", this.onMessage);
-    this.socket.addListener("close", this.onClose);
-  }
+  attachEvents() {}
 
   /**
    * Detach events
    */
-  detachEvents() {
-    this.socket.removeListener("message", this.onMessage);
-    this.socket.removeListener("close", this.onClose);
-  }
+  detachEvents() {}
 
   /**
    * Add an event to the list
@@ -91,7 +85,7 @@ export abstract class BaseSocketClient extends EventEmitter {
    */
   addEvent(
     name: string,
-    data?: object | boolean,
+    data?: object | boolean | string,
     callback?: (a: any) => any,
     force?: boolean
   ) {
