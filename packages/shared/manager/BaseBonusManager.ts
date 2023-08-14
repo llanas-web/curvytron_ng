@@ -7,7 +7,7 @@ import { EventEmitter } from "events";
 /**
  * Base Bonus Manager
  */
-export abstract class BaseBonusManager extends EventEmitter {
+export class BaseBonusManager extends EventEmitter {
   /**
    * Maximum number of bonus on the map at the same time
    */
@@ -23,10 +23,8 @@ export abstract class BaseBonusManager extends EventEmitter {
    */
   static bonusPopingMargin = 0.01;
 
-  static assets = {};
-
   game: BaseGame;
-  abstract bonuses: Collection<BaseBonus>;
+  bonuses: Collection<BaseBonus>;
   bonusCap: number;
   bonusPopingTime: number;
   bonusPopingMargin: number;
@@ -35,6 +33,7 @@ export abstract class BaseBonusManager extends EventEmitter {
     super();
 
     this.game = game;
+    this.bonuses = new Collection<BaseBonus>([], "id", true);
     this.clear = this.clear.bind(this);
   }
 

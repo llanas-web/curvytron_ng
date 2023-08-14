@@ -54,7 +54,7 @@ export abstract class BaseAvatar extends EventEmitter {
 
   x = 0;
   y = 0;
-  abstract trail: BaseTrail;
+  trail: any;
   bonusStack: any;
   angle = 0;
   velocityX = 0;
@@ -87,6 +87,7 @@ export abstract class BaseAvatar extends EventEmitter {
     this.name = player.name;
     this.color = player.color;
     this.player = player;
+    this.trail = new BaseTrail(this);
     this.bonusStack = new BaseBonusStack(this);
     // useless too? this.updateVelocities();
   }
