@@ -25,6 +25,16 @@ export class Player extends BasePlayer {
         data.active = this.client.active;
         return data;
     }
+    
+    /**
+     * Get avatar
+     */
+    getAvatar(): Avatar {
+        if (!this.avatar) {
+            this.avatar = new Avatar(this);
+        }
+        return this.avatar;
+    }
 }
 
 export interface SerializedPlayer extends SerializedBasePlayer {

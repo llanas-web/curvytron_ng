@@ -28,6 +28,7 @@ export class Game extends BaseGame {
     declare bonusManager: BonusManager;
 
     avatars: Collection<Avatar> = new Collection<Avatar>();
+    declare getLoadingAvatars: () => Collection<Avatar>
 
     constructor(room: Room) {
         super(room);
@@ -38,7 +39,7 @@ export class Game extends BaseGame {
         this.roundWinner = null;
         this.gameWinner = null;
         this.deathInFrame = false;        
-        
+
         this.avatars = this.room.players.map<Avatar>(player => player.getAvatar() as Avatar)
 
         let avatar: Avatar;
