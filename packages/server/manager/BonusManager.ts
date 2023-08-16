@@ -17,9 +17,9 @@ export class BonusManager extends BaseBonusManager {
     popingTimeout: any = null;
     bonusTypes: any;
 
-    constructor(game: Game, bonuses: any, rate: number) {
+    constructor(public game: Game, bonuses: any, rate: number) {
 
-        super(game);
+        super();
 
         this.world = new World(this.game.size, 1);
         this.bonusTypes = bonuses;

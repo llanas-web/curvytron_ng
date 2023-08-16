@@ -3,12 +3,13 @@ import { EventEmitter } from "events";
 import { WebSocket } from "ws";
 
 export abstract class BaseSocketClient extends EventEmitter {
-  id: string = null;
+  
+  id: string | null = null;
   socket: WebSocket;
   interval: number;
-  events = [];
+  events: any[] = [];
   callbacks = {};
-  loop = null;
+  loop: NodeJS.Timer | null = null;
   connected = true;
   callCount = 0;
 
@@ -111,7 +112,7 @@ export abstract class BaseSocketClient extends EventEmitter {
    * Add an event to the list
    */
   addEvents(sources: any[], force?: boolean) {
-    const events = [];
+    const events: any = [];
 
     for (const source of sources) {
       events.push(source);

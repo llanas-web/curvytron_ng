@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseSocketClient } from '@shared/core/BaseSocketClient';
+import { BaseSocketClient } from './base-socket-client';
 import { boundMethod } from 'autobind-decorator';
 
 @Injectable({
@@ -18,9 +18,9 @@ export class SocketClientService extends BaseSocketClient {
         this.id = null;
         this.connected = false;
 
-        this.socket.addEventListener('open', () => this.onOpen);
-        this.socket.addEventListener('error', () => this.onError);
-        this.socket.addEventListener('close', () => this.onClose);
+        this.socket.addEventListener('open', this.onOpen);
+        this.socket.addEventListener('error', this.onError);
+        this.socket.addEventListener('close', this.onClose);
     }
 
     /**

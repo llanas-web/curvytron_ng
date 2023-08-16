@@ -1,7 +1,6 @@
 import { boundMethod } from "autobind-decorator";
 import { Collection } from "@shared/collection";
 import { BaseBonus } from "@shared/model/BaseBonus";
-import { BaseGame } from "@shared/model/BaseGame";
 import { EventEmitter } from "events";
 
 /**
@@ -26,16 +25,14 @@ export class BaseBonusManager extends EventEmitter {
 
   static assets = {};
 
-  game: BaseGame;
   bonuses: Collection<BaseBonus>;
   bonusCap: number;
   bonusPopingTime: number;
   bonusPopingMargin: number;
 
-  constructor(game: BaseGame) {
+  constructor() {
     super();
 
-    this.game = game;
     this.bonuses = new Collection<BaseBonus>([], "id", true);
     this.clear = this.clear.bind(this);
   }

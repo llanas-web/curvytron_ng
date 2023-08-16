@@ -439,7 +439,7 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onRoomMaster(e: any) {
-        const master = this.clients.getById(e.detail.client);
+        const master = this.clients.getById(e.client);
 
         if (master) {
             this.setRoomMaster(master);

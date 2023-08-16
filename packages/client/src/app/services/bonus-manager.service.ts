@@ -3,7 +3,6 @@ import { Collection } from "@shared/collection";
 import { BaseBonusManager } from "@shared/manager/BaseBonusManager";
 import { boundMethod } from "autobind-decorator";
 import { MapBonus } from "../models/bonus/map-bonus.model";
-import { Game } from "../models/game.model";
 import { SpriteAsset } from "../utils/assets/sprite.asset";
 import { Canvas } from "./core/canvas";
 
@@ -37,10 +36,11 @@ export class BonusManagerService extends BaseBonusManager {
   loaded: boolean;
   sprite: SpriteAsset;
   canvas: Canvas;
-  bonuses: Collection<MapBonus>;
 
-  constructor(game: Game) {
-    super(game);
+  declare bonuses: Collection<MapBonus>;
+
+  constructor() {
+    super();
 
     this.bonuses = new Collection<MapBonus>([], "id", true);
     this.bonuses.index = false;

@@ -31,7 +31,7 @@ export class Game extends BaseGame {
   constructor(room: Room) {
     super(room);
 
-    this.bonusManager = new BonusManagerService(this);
+    this.bonusManager = new BonusManagerService();
 
     this.avatars = room.players.map<Avatar>((player) => player.getAvatar());
     this.size = this.getSize(this.avatars.count());
