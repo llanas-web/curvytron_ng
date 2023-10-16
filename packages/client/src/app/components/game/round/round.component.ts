@@ -13,6 +13,7 @@ import { NotifierService } from "src/app/services/notifier.service";
 })
 export class RoundComponent extends EventEmitter implements OnInit {
   @Input() game: Game;
+  @Input() backToRoom: Function;
 
   warmupInterval = null;
   roundWinner = null;
@@ -78,6 +79,7 @@ export class RoundComponent extends EventEmitter implements OnInit {
       this.warmupInterval = null;
     }
   }
+
   /**
    * Attach socket Events
    */

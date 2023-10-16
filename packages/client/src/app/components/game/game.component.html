@@ -42,7 +42,7 @@
       <ng-template [ngIf]="game">
         <app-kill-log [game]="game"></app-kill-log>
         <app-waiting [game]="game"></app-waiting>
-        <app-round [game]="game"></app-round>
+        <app-round [game]="game" [backToRoom]="backToRoom"></app-round>
       </ng-template>
       <div id="render" class="game-render">
         <canvas id="background" class="game-background"></canvas>

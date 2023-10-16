@@ -24,7 +24,7 @@
       </p>
       <div *ngIf="!game.started">
         <button
-          ng-click="backToRoom()"
+          (click)="backToRoom()"
           type="button"
           class="btn btn-hero btn-back-to-room"
         >
