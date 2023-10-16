@@ -27,7 +27,7 @@ export class Player extends BasePlayer {
     color: string,
     ready: boolean
   ) {
-    super(client.id, name, color, ready);
+    super("" + client.id, name, color, ready);
 
     this.client = client;
     this.id = id;

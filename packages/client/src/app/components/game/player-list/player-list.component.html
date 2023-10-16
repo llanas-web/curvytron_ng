@@ -6,11 +6,11 @@
   >
     <span
       class="line-color-preview"
-      [style.background-color]="avatar.player.color"
+      [style.background-color]="avatar.color"
     ></span>
     <span
       class="arrow"
-      [style.border-left-color]="avatar.player.color"
+      [style.border-left-color]="avatar.color"
       *ngIf="avatar.local"
     ></span>
     <span class="round-points" id="avatar-round-score-{{ avatar.id }}"></span>

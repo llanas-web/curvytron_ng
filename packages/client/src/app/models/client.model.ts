@@ -6,15 +6,10 @@ import { Player } from "./player.model";
  * Distant client
  */
 export class Client {
-  id: string;
   players = new Collection<Player>();
   master = false;
-  active: boolean;
 
-  constructor(id: string, active = true) {
-    this.id = id;
-    this.active = active;
-  }
+  constructor(public id: string | number, public active = true) {}
 
   /**
    * Set master

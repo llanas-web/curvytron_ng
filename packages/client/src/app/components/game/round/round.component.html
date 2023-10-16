@@ -35,7 +35,7 @@
             <tr *ngFor="let avatar of list; trackBy: trackById">
               <td class="rank">{{ $index + 1 }}</td>
               <td class="name">
-                <span [style.color]="avatar.player.color">{{
+                <span [style.color]="avatar.color">{{
                   avatar.name
                 }}</span>
               </td>
