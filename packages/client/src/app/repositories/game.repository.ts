@@ -158,11 +158,11 @@ export class GameRepository extends EventEmitter {
    * @param {Event} e
    */
   @boundMethod
-  onProperty(e: { avatar: number; property: string; value: number }) {
-    let avatar = this.game.avatars.getById(e.avatar);
+  onProperty(e) {
+    let avatar = this.game.avatars.getById(e[0]);
 
     if (avatar) {
-      avatar.set(e.property, e.value);
+      avatar.set(e[1], e[2]);
     }
   }
 

@@ -71,7 +71,7 @@ export class Avatar extends BaseAvatar {
    * Set position (from server)
    */
   setPositionFromServer(x: number, y: number) {
-    BaseAvatar.prototype.setPosition.call(this, x, y);
+    super.setPosition(x, y);
 
     this.changed = true;
 
@@ -216,6 +216,7 @@ export class Avatar extends BaseAvatar {
    */
   set(property: string | string[], value: any) {
     var method = "set" + property[0].toUpperCase() + property.slice(1);
+    console.log(method);
 
     if (typeof this[method] !== "undefined") {
       this[method](value);
