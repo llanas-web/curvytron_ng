@@ -309,6 +309,7 @@ export class Game extends BaseGame {
   /**
    * On avatar add point
    */
+  @boundMethod
   onPoint({ x, y, avatar }: { x: number; y: number; avatar: Avatar }) {
     if (this.started && this.world.active) {
       this.world.addBody(new AvatarBody(x, y, avatar));

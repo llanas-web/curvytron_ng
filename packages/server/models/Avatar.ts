@@ -150,7 +150,7 @@ export class Avatar extends BaseAvatar {
   /**
    * Add point
    */
-  addPoint(x: number, y: number, important: boolean = false) {
+  addPoint(x: number, y: number, important: boolean = true) {
     super.addPoint(x, y);
     this.emit("point", { avatar: this, x, y, important });
   }

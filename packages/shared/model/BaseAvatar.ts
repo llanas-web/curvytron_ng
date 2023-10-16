@@ -47,7 +47,7 @@ export abstract class BaseAvatar extends EventEmitter {
 
   x = 0;
   y = 0;
-  trail: any;
+  trail: BaseTrail;
   bonusStack: any;
   angle = 0;
   velocityX = 0;
