@@ -123,6 +123,7 @@ export class GameController {
     if (this.clients.remove(client)) {
       for (let i = client.players.items.length - 1; i >= 0; i--) {
         if (client.players.items[i].avatar) {
+          console.log(client.players.items[i].avatar);
           this.game.removeAvatar(client.players.items[i].avatar);
         }
       }
@@ -484,6 +485,7 @@ export class GameController {
    */
   @boundMethod
   onRoundNew() {
+    console.log("game.controller");
     this.socketGroup.addEvent("round:new");
   }
 

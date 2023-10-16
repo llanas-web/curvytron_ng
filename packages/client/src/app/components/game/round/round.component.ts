@@ -3,7 +3,7 @@ import { boundMethod } from "autobind-decorator";
 import { EventEmitter } from "events";
 import { Avatar } from "src/app/models/avatar.model";
 import { Game } from "src/app/models/game.model";
-import { RoomRepository } from "src/app/repositories/room.repository";
+import { GameRepository } from "src/app/repositories/game.repository";
 import { NotifierService } from "src/app/services/notifier.service";
 
 @Component({
@@ -29,7 +29,7 @@ export class RoundComponent extends EventEmitter implements OnInit {
   }
 
   constructor(
-    private repository: RoomRepository,
+    private repository: GameRepository,
     private notifier: NotifierService
   ) {
     super();
