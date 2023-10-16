@@ -159,7 +159,6 @@ export class RoomsRepository extends EventEmitter {
    */
   @boundMethod
   start() {
-    console.dir(this.client);
     if (this.client.connected) {
       this.attachEvents();
       this.client.addEvent("room:fetch");

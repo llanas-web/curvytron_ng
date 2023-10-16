@@ -85,7 +85,6 @@ export class RoomsController extends EventEmitter {
    * On new room
    */
   onCreateRoom({ name }: { name: string }, callback: (data: any) => any) {
-    console.log(name);
     const trimedName = name.substr(0, Room.maxLength).trim();
     const room = this.repository.create(trimedName);
     if (room instanceof Room) {

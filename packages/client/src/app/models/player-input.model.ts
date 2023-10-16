@@ -187,7 +187,6 @@ export class PlayerInput extends EventEmitter {
    */
   @boundMethod
   onKeyDown({ keyCode }: { keyCode: number }) {
-    console.log(keyCode);
     var index = this.binding.findIndex(
       (el: string | number | Touch) => el === keyCode
     );

@@ -74,7 +74,7 @@ export abstract class BaseAvatar extends EventEmitter {
 
   constructor(public id: string, public name: string, public color: string) {
     super();
-    
+
     this.trail = new BaseTrail(this);
     this.bonusStack = new BaseBonusStack(this);
     // useless too? this.updateVelocities();
@@ -195,7 +195,6 @@ export abstract class BaseAvatar extends EventEmitter {
 
   setStamina(stamina: number) {
     this.stamina = stamina;
-    console.log("stamina " + stamina);
   }
 
   /**
@@ -211,7 +210,6 @@ export abstract class BaseAvatar extends EventEmitter {
           this.staminaDate = Date.now();
         }
       } else {
-        console.log("No stamina !");
         this.speeding = 1;
       }
     } else if (this.stamina < BaseAvatar.staminaBase) {

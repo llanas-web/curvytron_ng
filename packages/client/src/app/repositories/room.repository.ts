@@ -83,8 +83,6 @@ export class RoomRepository extends EventEmitter {
    * Join room
    */
   join(name, password, callback) {
-    console.log("JOIN ROOM REPO");
-
     if (this.room && this.room.name === name) {
       return callback({ success: true, room: this.room });
     }
