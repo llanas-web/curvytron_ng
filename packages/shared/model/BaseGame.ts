@@ -285,7 +285,6 @@ export abstract class BaseGame extends EventEmitter {
   endRound() {
     if (this.inRound) {
       this.inRound = false;
-      this.onRoundEnd();
       setTimeout(this.stop, BaseGame.warmdownTime);
     }
   }
