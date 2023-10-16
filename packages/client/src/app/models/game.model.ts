@@ -120,7 +120,9 @@ export class Game extends BaseGame {
   isTieBreak(): boolean {
     var maxScore = this.maxScore;
 
-    return this.avatars.match((avatar) => avatar.score >= maxScore) !== null;
+    return (
+      this.avatars.match((avatar) => avatar.score >= maxScore) !== undefined
+    );
   }
 
   /**
