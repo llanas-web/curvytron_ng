@@ -84,9 +84,7 @@ export abstract class BaseGame extends EventEmitter {
   /**
    * On round end
    */
-  onRoundEnd(): void {
-    throw new Error("Method not implemented.");
-  }
+  onRoundEnd(): void {}
 
   /**
    * Get framerate

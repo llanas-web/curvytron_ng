@@ -166,6 +166,7 @@ export class Game extends BaseGame {
       }
     }
     this.endRound();
+    this.onRoundEnd();
   }
 
   /**
