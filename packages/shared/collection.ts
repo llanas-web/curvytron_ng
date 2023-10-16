@@ -8,7 +8,7 @@ export class Collection<T> {
   constructor(items: T[] = [], key: string = "id", index?: boolean) {
     this.key = key;
     this.index = Boolean(index);
-    items.forEach((item) => this.add(item));
+    items.filter(item => !!item).forEach((item) => this.add(item));
   }
 
   /**

@@ -7,6 +7,12 @@ importers:
       lerna:
         specifier: ^6.6.2
         version: 6.6.2
+      ts-node:
+        specifier: ~8.6.2
+        version: 8.6.2(typescript@3.7.5)
+      typescript:
+        specifier: ~3.7.5
+        version: 3.7.5
 
   packages/client:
     dependencies:
@@ -161,6 +167,9 @@ importers:
       '@types/express':
         specifier: ^4.17.2
         version: 4.17.2
+      '@types/node':
+        specifier: '18'
+        version: 18.7.5
       express:
         specifier: ^4.17.1
         version: 4.18.2(supports-color@6.1.0)
@@ -176,7 +185,7 @@ importers:
     devDependencies:
       '@types/ws':
         specifier: ^8.5.3
-        version: 8.5.3
+        version: 8.5.5
       autobind-decorator:
         specifier: ^2.4.0
         version: 2.4.0
@@ -2241,12 +2250,6 @@ packages:
       '@types/node': 18.7.5
       '@types/source-list-map': 0.1.2
       source-map: 0.6.1
-    dev: true
-
-  /@types/ws@8.5.3:
-    resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
-    dependencies:
-      '@types/node': 18.7.5
     dev: true
 
   /@types/ws@8.5.5:

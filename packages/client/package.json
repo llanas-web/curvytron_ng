@@ -2,7 +2,7 @@
     "name": "curvytron-ng",
     "version": "0.0.0",
     "scripts": {
-        "serve": "ng serve",
+        "dev": "ng serve",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",

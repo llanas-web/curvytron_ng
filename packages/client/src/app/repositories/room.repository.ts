@@ -337,7 +337,7 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onClientAdd(e: any) {
-        this.clients.add(new Client(e.detail));
+        this.clients.add(new Client(e));
     }
 
     /**
@@ -345,7 +345,7 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onClientRemove(e: any) {
-        this.clients.removeById(e.detail);
+        this.clients.removeById(e);
     }
 
     /**
@@ -371,7 +371,7 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onLeaveRoom(e: any) {
-        const player = this.room.players.getById(e.detail.player);
+        const player = this.room.players.getById(e.player);
 
         if (player && this.room.removePlayer(player)) {
             this.playerCache.add(player);
@@ -384,10 +384,10 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onClientActivity(e: any) {
-        const client = this.clients.getById(e.detail.client);
+        const client = this.clients.getById(e.client);
 
         if (client) {
-            client.active = e.detail.active;
+            client.active = e.active;
             this.emit('client:activity', { client, active: client.active });
         }
     }
@@ -397,11 +397,10 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onPlayerColor(e: any) {
-        const data = e.detail;
-        const player = this.room.players.getById(data.player);
+        const player = this.room.players.getById(e.player);
 
         if (player) {
-            player.setColor(data.color);
+            player.setColor(e.color);
             this.emit('player:color', { player });
         }
     }
@@ -411,11 +410,10 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onPlayerName(e: any) {
-        const data = e.detail;
-        const player = this.room.players.getById(data.player);
+        const player = this.room.players.getById(e.player);
 
         if (player) {
-            player.setName(data.name);
+            player.setName(e.name);
             this.emit('player:name', { player });
         }
     }
@@ -424,8 +422,7 @@ export class RoomRepository extends EventEmitter {
      * On player toggle ready
      */
     @boundMethod
-    onPlayerReady(e: any) {
-        const data = e.detail;
+    onPlayerReady(data: {player: string, ready: boolean}) {
         const player = this.room.players.getById(data.player);
 
         if (player) {
@@ -450,9 +447,7 @@ export class RoomRepository extends EventEmitter {
      * On config open
      */
     @boundMethod
-    onConfigOpen(e: any) {
-        const data = e.detail;
-
+    onConfigOpen(data: any) {
         this.room.config.setOpen(data.open);
         this.room.config.setPassword(data.password);
 
@@ -463,9 +458,7 @@ export class RoomRepository extends EventEmitter {
      * On config max score
      */
     @boundMethod
-    onConfigMaxScore(e: any) {
-        const data = e.detail;
-
+    onConfigMaxScore(data: any) {
         this.room.config.setMaxScore(data.maxScore);
         this.emit('config:max-score', { maxScore: data.maxScore });
     }
@@ -474,9 +467,7 @@ export class RoomRepository extends EventEmitter {
      * On config variable
      */
     @boundMethod
-    onConfigVariable(e: any) {
-        const data = e.detail;
-
+    onConfigVariable(data: any) {
         this.room.config.setVariable(data.variable, data.value);
         this.emit('config:variable', { variable: data.variable, value: data.value });
     }
@@ -485,9 +476,7 @@ export class RoomRepository extends EventEmitter {
      * On config bonus
      */
     @boundMethod
-    onConfigBonus(e: any) {
-        const data = e.detail;
-
+    onConfigBonus(data: any) {
         this.room.config.setBonus(data.bonus, data.enabled);
         this.emit('config:bonus', { bonus: data.bonus, enabled: data.enabled });
     }
@@ -506,15 +495,15 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onVote(e: any) {
-        let player = this.room.players.getById(e.detail.target);
+        let player = this.room.players.getById(e.target);
 
         if (!player) {
-            player = this.playerCache.getById(e.detail.target);
+            player = this.playerCache.getById(e.target);
         }
 
         if (player) {
             player.vote = e.type === 'vote:new';
-            this.emit(e.type, { target: player, result: e.detail.result });
+            this.emit(e.type, { target: player, result: e.result });
         }
     }
 
@@ -523,10 +512,10 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     onKick(e: any) {
-        let player = this.room.players.getById(e.detail);
+        let player = this.room.players.getById(e);
 
         if (!player) {
-            player = this.playerCache.getById(e.detail);
+            player = this.playerCache.getById(e);
         }
 
         if (player) {
@@ -539,7 +528,7 @@ export class RoomRepository extends EventEmitter {
      */
     @boundMethod
     forwardEvent(e: any) {
-        this.emit(e.type, e.detail);
+        this.emit(e.type, e);
     }
 
     /**
