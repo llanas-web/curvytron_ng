@@ -4,8 +4,12 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines":{
+    "node": "16.19.x"
+  },
   "scripts": {
-    "dev": "pnpm -r --stream --filter=./packages/* dev"
+    "dev": "pnpm -r --stream --filter=./packages/* dev",
+    "start": "pnpm -r --stream --filter=./packages/* start"
   },
   "devDependencies": {
     "lerna": "^6.6.2",
