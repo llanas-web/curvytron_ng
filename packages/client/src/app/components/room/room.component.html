@@ -27,14 +27,14 @@
       <span id="starter-count" *ngIf="launching">{{ launching }}</span>
     </button>
 
-    <form (ng-submit)="addPlayer()" class="top-right-form" name="addPlayer">
+    <form (ngSubmit)="addPlayer()" class="top-right-form" name="addPlayer">
       <button type="submit" id="submit">
         <span><i class="icon-plus"></i></span>
       </button>
       <input
         type="text"
         id="add-user-name"
-        [(ngModel)]="name"
+        [(ngModel)]="username"
         class="form-control"
         name="username"
         placeholder="Add a local player"

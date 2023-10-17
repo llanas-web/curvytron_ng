@@ -29,6 +29,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
 
   name: string;
   password: string;
+  username: string = "";
 
   controlSynchro: boolean;
   useTouch: boolean;
@@ -60,7 +61,6 @@ export class RoomComponent extends EventEmitter implements OnInit {
     this.controlSynchro = false;
     this.useTouch = false;
     this.launchInterval = null;
-
     this.repository.start();
     // gamepadListener.start();
 
@@ -257,7 +257,7 @@ export class RoomComponent extends EventEmitter implements OnInit {
    * Add player
    */
   @boundMethod
-  addPlayer(name: string = this.name, color: string = null) {
+  addPlayer(name: string = this.username, color: string = null) {
     if (name) {
       this.repository.addPlayer(
         name,
