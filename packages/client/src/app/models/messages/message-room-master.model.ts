@@ -15,6 +15,7 @@ export default class MessageRoomMaster extends Message {
     this.client = client;
     this.target = this.getPlayer();
   }
+
   /**
    * Get target
    */

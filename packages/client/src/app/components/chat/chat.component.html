@@ -13,7 +13,7 @@
       {{ message.player.name }} :
     </span>
     <span class="message-content" [ngSwitch]="message.type">
-      <span *ngSwitchCase="vote - kick">
+      <span *ngSwitchCase="'vote-kick'">
         <span *ngIf="!message.target.local && !message.target.kicked">
           Do you want to kick
           <span [style.color]="message.target.color">{{
@@ -41,7 +41,7 @@
         </span>
       </span>
 
-      <span *ngSwitchCase="kick">
+      <span *ngSwitchCase="'kick'">
         <span *ngIf="message.target">
           Farewell
           <span [style.color]="message.target.color">{{
@@ -51,14 +51,14 @@
         </span>
       </span>
 
-      <span *ngSwitchCase="room - master">
+      <span *ngSwitchCase="'room-master'">
         <span [style.color]="message.getTarget().color">{{
           message.getTarget().name
         }}</span>
         is now the room master.
       </span>
 
-      <span *ngSwitchCase="mute">
+      <span *ngSwitchCase="'mute'">
         You muted
         <span [style.color]="message.player.color">{{
           message.player.name
