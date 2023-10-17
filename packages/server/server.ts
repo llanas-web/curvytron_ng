@@ -68,4 +68,4 @@ export class CurvytronServer extends EventEmitter {
   }
 }
 
-exports.module = new CurvytronServer(8090);
+exports.module = new CurvytronServer(Number(process.env.PORT) || 8090);
